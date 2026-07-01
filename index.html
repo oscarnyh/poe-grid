@@ -11,58 +11,84 @@
     h1 { color: #ffd700; font-size: 2rem; margin-bottom: 8px; }
     .subtitle { color: #888; margin-bottom: 32px; font-size: 0.9rem; }
     .boss-card { background: #1a1a2e; border-radius: 12px; padding: 24px; margin-bottom: 24px; border: 1px solid #2a2a3e; }
-    .boss-card h2 { color: #ffd700; margin-bottom: 16px; font-size: 1.3rem; }
-    .boss-card .ev-total { color: #7cff7c; font-size: 1.1rem; margin-bottom: 16px; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-    th { text-align: left; padding: 8px 12px; border-bottom: 1px solid #333; color: #888; font-weight: 500; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
-    td { padding: 8px 12px; border-bottom: 1px solid #222; }
+    .boss-card h2 { color: #ffd700; margin-bottom: 8px; font-size: 1.3rem; }
+    .boss-card .total-ev { color: #7cff7c; font-size: 1.1rem; margin-bottom: 16px; padding: 8px 12px; background: #0f0f1a; border-radius: 6px; display: inline-block; }
+    .boss-card .total-ev span { color: #ffd700; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 8px; }
+    th { text-align: left; padding: 6px 8px; border-bottom: 1px solid #333; color: #888; font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 5px 8px; border-bottom: 1px solid #222; vertical-align: middle; }
     tr:hover { background: #1e1e34; }
-    .cat-label { color: #aaa; font-size: 0.8rem; font-weight: 500; }
+    .cat-label { color: #aaa; font-size: 0.8rem; font-weight: 500; padding-top: 12px !important; }
     .item-name { color: #e0e0e0; }
+    .item-icon { width: 20px; height: 20px; vertical-align: middle; margin-right: 6px; }
     .rate { color: #aaa; }
     .price { color: #7cff7c; text-align: right; }
     .ev { color: #ffd700; text-align: right; font-weight: 500; }
-    .section-divider td { border-top: 2px solid #333; }
     .last-updated { color: #666; font-size: 0.8rem; text-align: center; margin-top: 32px; padding-top: 16px; border-top: 1px solid #222; }
-    .badge { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; margin-left: 4px; }
-    .badge-guaranteed { background: #2a3a2a; color: #7cff7c; }
-    .badge-bonus { background: #3a2a3a; color: #d4a0ff; }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>PoE Uber Boss EV</h1>
-    <p class="subtitle">Expected value per kill for Ancestors league. Prices are live from the trade API.</p>
+    <p class="subtitle">Expected value per kill for Ancestors league. Prices live from trade API &amp; poe.ninja.</p>
 
     <div class="boss-card">
-      <h2>Uber Shaper <span class="badge badge-guaranteed">EV: 2.7 div</span></h2>
+      <h2>Uber Shaper</h2>
+      <div class="total-ev">EV: <span>2.73 div</span> / kill</div>
       <table>
         <thead>
-          <tr><th>Item</th><th>Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr>
+          <tr><th>Item</th><th>Type</th><th style="text-align:right">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr>
         </thead>
         <tbody>
-          <tr><td colspan="4" class="cat-label">🎲 Guaranteed Unique (1 per kill)</td></tr>
-          <tr><td class="item-name">Echoes of Creation</td><td class="rate">40%</td><td class="price">0.18 div</td><td class="ev">0.07 div</td></tr>
-          <tr><td class="item-name">Entropic Devastation</td><td class="rate">36%</td><td class="price">0.16 div</td><td class="ev">0.06 div</td></tr>
-          <tr><td class="item-name">The Tides of Time</td><td class="rate">22%</td><td class="price">9.00 div</td><td class="ev">1.98 div</td></tr>
-          <tr><td class="item-name">Starforge</td><td class="rate">2%</td><td class="price">5.00 div</td><td class="ev">0.10 div</td></tr>
-          <tr><td colspan="4" class="cat-label">💠 Guaranteed Fragment</td></tr>
-          <tr><td class="item-name">Fragment of Shape / Knowledge</td><td class="rate">100%</td><td class="price">~3 chaos</td><td class="ev">0.03 div</td></tr>
-          <tr><td colspan="4" class="cat-label">✨ Encounter-specific (bonus)</td></tr>
-          <tr><td class="item-name">Shaper's Exalted Orb</td><td class="rate">12%</td><td class="price">1.70 div</td><td class="ev">0.20 div</td></tr>
-          <tr><td class="item-name">Orb of Dominance</td><td class="rate">3%</td><td class="price">2.40 div</td><td class="ev">0.07 div</td></tr>
-          <tr><td class="item-name">Sublime Vision</td><td class="rate">2%</td><td class="price">5.80 div</td><td class="ev">0.12 div</td></tr>
-          <tr><td class="item-name">Cosmic Reliquary Key</td><td class="rate">1%</td><td class="price">~10 div</td><td class="ev">0.10 div</td></tr>
+          <tr><td colspan="5" class="cat-label">🎲 Guaranteed Unique (1 per kill)</td></tr>
+          <tr>
+            <td><img class="item-icon" src="https://www.poewiki.net/images/thumb/6/62/Echoes_of_Creation_inventory_icon.png/20px-Echoes_of_Creation_inventory_icon.png" alt=""/>Echoes of Creation</td>
+            <td class="rate">Helm</td><td class="price">40%</td><td class="price">0.18 div</td><td class="ev">0.07 div</td>
+          </tr>
+          <tr>
+            <td><img class="item-icon" src="https://www.poewiki.net/images/thumb/c/c0/Entropic_Devastation_inventory_icon.png/20px-Entropic_Devastation_inventory_icon.png" alt=""/>Entropic Devastation</td>
+            <td class="rate">Gloves</td><td class="price">36%</td><td class="price">0.16 div</td><td class="ev">0.06 div</td>
+          </tr>
+          <tr>
+            <td><img class="item-icon" src="https://www.poewiki.net/images/thumb/2/2f/The_Tides_of_Time_inventory_icon.png/20px-The_Tides_of_Time_inventory_icon.png" alt=""/>The Tides of Time</td>
+            <td class="rate">Belt</td><td class="price">22%</td><td class="price">9.00 div</td><td class="ev">1.98 div</td>
+          </tr>
+          <tr>
+            <td><img class="item-icon" src="https://www.poewiki.net/images/thumb/0/03/Starforge_inventory_icon.png/20px-Starforge_inventory_icon.png" alt=""/>Starforge</td>
+            <td class="rate">2H Sword</td><td class="price">2%</td><td class="price">5.00 div</td><td class="ev">0.10 div</td>
+          </tr>
+          <tr><td colspan="5" class="cat-label">💠 Guaranteed Fragment</td></tr>
+          <tr>
+            <td><img class="item-icon" src="https://www.poewiki.net/images/thumb/6/62/Fragment_of_Shape_inventory_icon.png/20px-Fragment_of_Shape_inventory_icon.png" alt=""/>Fragment of Shape / Knowledge</td>
+            <td class="rate">Fragment</td><td class="price">100%</td><td class="price">~3 chaos</td><td class="ev">0.03 div</td>
+          </tr>
+          <tr><td colspan="5" class="cat-label">✨ Encounter-specific (bonus drops)</td></tr>
+          <tr>
+            <td><img class="item-icon" src="https://www.poewiki.net/images/thumb/a/ac/Shaper%27s_Exalted_Orb_inventory_icon.png/20px-Shaper%27s_Exalted_Orb_inventory_icon.png" alt=""/>Shaper's Exalted Orb</td>
+            <td class="rate">Currency</td><td class="price">12%</td><td class="price">1.70 div</td><td class="ev">0.20 div</td>
+          </tr>
+          <tr>
+            <td><img class="item-icon" src="https://www.poewiki.net/images/thumb/c/c2/Orb_of_Dominance_inventory_icon.png/20px-Orb_of_Dominance_inventory_icon.png" alt=""/>Orb of Dominance</td>
+            <td class="rate">Currency</td><td class="price">3%</td><td class="price">2.40 div</td><td class="ev">0.07 div</td>
+          </tr>
+          <tr>
+            <td><img class="item-icon" src="https://www.poewiki.net/images/thumb/e/eb/Sublime_Vision_inventory_icon.png/20px-Sublime_Vision_inventory_icon.png" alt=""/>Sublime Vision</td>
+            <td class="rate">Jewel</td><td class="price">2%</td><td class="price">5.80 div</td><td class="ev">0.12 div</td>
+          </tr>
+          <tr>
+            <td><img class="item-icon" src="https://www.poewiki.net/images/thumb/d/d1/Cosmic_Reliquary_Key_inventory_icon.png/20px-Cosmic_Reliquary_Key_inventory_icon.png" alt=""/>Cosmic Reliquary Key</td>
+            <td class="rate">Key</td><td class="price">1%</td><td class="price">~10 div</td><td class="ev">0.10 div</td>
+          </tr>
         </tbody>
       </table>
     </div>
 
     <div class="boss-card" style="opacity:0.5">
       <h2>More bosses coming soon...</h2>
-      <p style="color:#666">Uber Sirus, Uber Maven, Uber Eater, Uber Exarch, Uber Cortex</p>
+      <p style="color:#666">Uber Sirus • Uber Maven • Uber Eater • Uber Exarch • Uber Cortex</p>
     </div>
 
-    <div class="last-updated">Last updated: 2026-07-01 | Data from poewiki.net + poe.ninja + PoE Trade API</div>
+    <div class="last-updated">Last updated: 2026-07-01 | Data: poewiki.net + poe.ninja + PoE Trade API</div>
   </div>
 </body>
 </html>
