@@ -1,2 +1,3 @@
-# poe-boss-ev
-PoE Uber Boss Expected Value Reference
+# PoE Boss EV
+
+Updated: 2026-07-03 18:25 UTC
