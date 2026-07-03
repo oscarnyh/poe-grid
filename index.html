@@ -12,16 +12,15 @@
     .subtitle { color: #888; margin-bottom: 32px; font-size: 0.9rem; }
     .boss-card { background: #1a1a2e; border-radius: 12px; padding: 24px; margin-bottom: 24px; border: 1px solid #2a2a3e; }
     .boss-card h2 { color: #ffd700; margin-bottom: 8px; font-size: 1.3rem; }
-    .boss-card .total-ev { color: #7cff7c; font-size: 1.1rem; margin-bottom: 16px; padding: 8px 12px; background: #0f0f1a; border-radius: 6px; display: inline-block; }
+    .boss-card .total-ev { color: #7cff7c; font-size: 1.1rem; margin-bottom: 16px; padding: 8px 12px; background: #0f0f1a; border-radius: 6px; display:inline-block; }
     .boss-card .total-ev span { color: #ffd700; }
     table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 8px; }
-    th { text-align: left; padding: 6px 8px; border-bottom: 1px solid #333; color: #888; font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
-    td { padding: 5px 8px; border-bottom: 1px solid #222; vertical-align: middle; }
+    th { text-align: left; padding: 6px 8px; border-bottom: 1px solid #333; color: #888; font-weight: 500; font-size: 0.75rem; text-transform: uppercase; }
+    td { padding: 5px 8px; border-bottom: 1px solid #222; }
     tr:hover { background: #1e1e34; }
     .cat-label { color: #aaa; font-size: 0.8rem; font-weight: 500; padding-top: 12px !important; }
     .item-cell { display: flex; align-items: center; gap: 8px; }
     .item-icon { width: 24px; height: 24px; flex-shrink: 0; object-fit: contain; }
-    .item-name { color: #e0e0e0; }
     .rate { color: #aaa; text-align: center; }
     .price { color: #7cff7c; text-align: right; }
     .ev { color: #ffd700; text-align: right; font-weight: 500; }
@@ -31,52 +30,52 @@
 <body>
   <div class="container">
     <h1>PoE Uber Boss EV</h1>
-    <p class="subtitle">Expected value per kill for Ancestors league. Prices from trade API + poe.ninja.</p>
+    <p class="subtitle">Expected value per kill — Ancestors league. Prices from PoE Trade API (Lambda proxy) + poe.ninja.</p>
 
 
     <div class="boss-card">
       <h2>Uber Shaper</h2>
-      <div class="total-ev">EV: <span>4.30 div</span> / kill</div>
+      <div class="total-ev">EV: <span>3.14 div</span> / kill</div>
       <table>
         <thead>
           <tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr>
         </thead>
         <tbody>
-          <tr><td colspan="4" class="cat-label">🎲 Guaranteed Unique (1 per kill)</td></tr>
+          <tr><td colspan="4" class="cat-label">Guaranteed Unique (1 per kill)</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/6/62/Echoes_of_Creation_inventory_icon.png" alt=""/>Echoes of Creation</div></td>
-            <td class="rate">40%</td><td class="price">0.14 div</td><td class="ev">0.06 div</td>
+            <td class="rate">40%</td><td class="price">0.01 div</td><td class="ev">0.00 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/c/c0/Entropic_Devastation_inventory_icon.png" alt=""/>Entropic Devastation</div></td>
-            <td class="rate">36%</td><td class="price">0.14 div</td><td class="ev">0.05 div</td>
+            <td class="rate">36%</td><td class="price">0.11 div</td><td class="ev">0.04 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/2/2f/The_Tides_of_Time_inventory_icon.png" alt=""/>The Tides of Time</div></td>
-            <td class="rate">22%</td><td class="price">10.00 div</td><td class="ev">2.20 div</td>
+            <td class="rate">22%</td><td class="price">5.00 div</td><td class="ev">1.10 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/0/03/Starforge_inventory_icon.png" alt=""/>Starforge</div></td>
-            <td class="rate">2%</td><td class="price">5.00 div</td><td class="ev">0.10 div</td>
+            <td class="rate">2%</td><td class="price">2.00 div</td><td class="ev">0.04 div</td>
           </tr>
-          <tr><td colspan="4" class="cat-label">💠 Guaranteed Fragment</td></tr>
+          <tr><td colspan="4" class="cat-label">Guaranteed Fragment</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/6/62/Fragment_of_Shape_inventory_icon.png" alt=""/>Fragment of Shape / Knowledge</div></td>
-            <td class="rate">100%</td><td class="price">1.01 div</td><td class="ev">1.01 div</td>
+            <td class="rate">100%</td><td class="price">0.82 div</td><td class="ev">0.82 div</td>
           </tr>
-          <tr><td colspan="4" class="cat-label">📦 Additional Drops</td></tr>
+          <tr><td colspan="4" class="cat-label">Additional Drops</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/a/ac/Shaper%27s_Exalted_Orb_inventory_icon.png" alt=""/>Shaper's Exalted Orb</div></td>
-            <td class="rate">12%</td><td class="price">1.20 div</td><td class="ev">0.14 div</td>
+            <td class="rate">12%</td><td class="price">1.30 div</td><td class="ev">0.16 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/c/c2/Orb_of_Dominance_inventory_icon.png" alt=""/>Orb of Dominance</div></td>
-            <td class="rate">3%</td><td class="price">1.90 div</td><td class="ev">0.06 div</td>
+            <td class="rate">3%</td><td class="price">6.60 div</td><td class="ev">0.20 div</td>
           </tr>
-          <tr><td colspan="4" class="cat-label">✨ Encounter-specific</td></tr>
+          <tr><td colspan="4" class="cat-label">Encounter-specific</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/e/eb/Sublime_Vision_inventory_icon.png" alt=""/>Sublime Vision (unid)</div></td>
-            <td class="rate">2%</td><td class="price">29.00 div</td><td class="ev">0.58 div</td>
+            <td class="rate">2%</td><td class="price">34.00 div</td><td class="ev">0.68 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/d/d1/Cosmic_Reliquary_Key_inventory_icon.png" alt=""/>Cosmic Reliquary Key</div></td>
@@ -88,58 +87,58 @@
 
     <div class="boss-card">
       <h2>Uber Elder</h2>
-      <div class="total-ev">EV: <span>2.22 div</span> / kill</div>
+      <div class="total-ev">EV: <span>2.39 div</span> / kill</div>
       <table>
         <thead>
           <tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr>
         </thead>
         <tbody>
-          <tr><td colspan="4" class="cat-label">🎲 Guaranteed Unique (1 per kill)</td></tr>
+          <tr><td colspan="4" class="cat-label">Guaranteed Unique (1 per kill)</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/f/f6/Call_of_the_Void_inventory_icon.png" alt=""/>Call of the Void</div></td>
-            <td class="rate">40%</td><td class="price">0.05 div</td><td class="ev">0.02 div</td>
+            <td class="rate">40%</td><td class="price">0.04 div</td><td class="ev">0.02 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/7/7f/The_Devourer_of_Minds_inventory_icon.png" alt=""/>The Devourer of Minds</div></td>
-            <td class="rate">30%</td><td class="price">0.03 div</td><td class="ev">0.01 div</td>
+            <td class="rate">30%</td><td class="price">0.02 div</td><td class="ev">0.01 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/0/0b/Soul_Ascension_inventory_icon.png" alt=""/>Soul Ascension</div></td>
-            <td class="rate">10%</td><td class="price">0.64 div</td><td class="ev">0.06 div</td>
+            <td class="rate">10%</td><td class="price">0.36 div</td><td class="ev">0.04 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/2/2e/Impresence_inventory_icon.png" alt=""/>Impresence (unid)</div></td>
-            <td class="rate">10%</td><td class="price">0.11 div</td><td class="ev">0.01 div</td>
+            <td class="rate">10%</td><td class="price">0.09 div</td><td class="ev">0.01 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/2/21/The_Eternity_Shroud_inventory_icon.png" alt=""/>The Eternity Shroud</div></td>
-            <td class="rate">6%</td><td class="price">0.02 div</td><td class="ev">0.00 div</td>
+            <td class="rate">6%</td><td class="price">0.01 div</td><td class="ev">0.00 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/7/7b/Voidforge_inventory_icon.png" alt=""/>Voidforge</div></td>
-            <td class="rate">4%</td><td class="price">23.00 div</td><td class="ev">0.92 div</td>
+            <td class="rate">4%</td><td class="price">25.00 div</td><td class="ev">1.00 div</td>
           </tr>
-          <tr><td colspan="4" class="cat-label">📦 Additional Drops</td></tr>
+          <tr><td colspan="4" class="cat-label">Additional Drops</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/1/1d/Watcher%27s_Eye_inventory_icon.png" alt=""/>Watcher's Eye (unid)</div></td>
-            <td class="rate">30%</td><td class="price">1.45 div</td><td class="ev">0.43 div</td>
+            <td class="rate">30%</td><td class="price">0.96 div</td><td class="ev">0.29 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/a/ac/Shaper%27s_Exalted_Orb_inventory_icon.png" alt=""/>Shaper's Exalted Orb</div></td>
-            <td class="rate">15%</td><td class="price">1.20 div</td><td class="ev">0.18 div</td>
+            <td class="rate">15%</td><td class="price">1.30 div</td><td class="ev">0.20 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/5/5c/Elder%27s_Exalted_Orb_inventory_icon.png" alt=""/>Elder's Exalted Orb</div></td>
-            <td class="rate">10%</td><td class="price">1.00 div</td><td class="ev">0.10 div</td>
+            <td class="rate">10%</td><td class="price">0.69 div</td><td class="ev">0.07 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/c/c2/Orb_of_Dominance_inventory_icon.png" alt=""/>Orb of Dominance</div></td>
-            <td class="rate">5%</td><td class="price">1.90 div</td><td class="ev">0.10 div</td>
+            <td class="rate">5%</td><td class="price">6.60 div</td><td class="ev">0.33 div</td>
           </tr>
-          <tr><td colspan="4" class="cat-label">✨ Encounter-specific</td></tr>
+          <tr><td colspan="4" class="cat-label">Encounter-specific</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/e/eb/Sublime_Vision_inventory_icon.png" alt=""/>Sublime Vision (unid)</div></td>
-            <td class="rate">1%</td><td class="price">29.00 div</td><td class="ev">0.29 div</td>
+            <td class="rate">1%</td><td class="price">34.00 div</td><td class="ev">0.34 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/d/d1/Cosmic_Reliquary_Key_inventory_icon.png" alt=""/>Decaying Reliquary Key</div></td>
@@ -155,16 +154,16 @@
 
     <div class="boss-card">
       <h2>Uber Sirus</h2>
-      <div class="total-ev">EV: <span>3.69 div</span> / kill</div>
+      <div class="total-ev">EV: <span>1.42 div</span> / kill</div>
       <table>
         <thead>
           <tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr>
         </thead>
         <tbody>
-          <tr><td colspan="4" class="cat-label">🎲 Guaranteed Unique (1 per kill)</td></tr>
+          <tr><td colspan="4" class="cat-label">Guaranteed Unique (1 per kill)</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/8/8b/Thread_of_Hope_inventory_icon.png" alt=""/>Thread of Hope</div></td>
-            <td class="rate">55%</td><td class="price">5.00 div</td><td class="ev">2.75 div</td>
+            <td class="rate">55%</td><td class="price">0.21 div</td><td class="ev">0.12 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/3/3e/The_Tempest_Rising_inventory_icon.png" alt=""/>The Tempest Rising</div></td>
@@ -176,18 +175,18 @@
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/9/9e/The_Saviour_inventory_icon.png" alt=""/>The Saviour</div></td>
-            <td class="rate">0.5%</td><td class="price">14.00 div</td><td class="ev">0.07 div</td>
+            <td class="rate">0.5%</td><td class="price">11.00 div</td><td class="ev">0.06 div</td>
           </tr>
-          <tr><td colspan="4" class="cat-label">📦 Additional Drops</td></tr>
+          <tr><td colspan="4" class="cat-label">Additional Drops</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/1/1e/Awakener%27s_Orb_inventory_icon.png" alt=""/>Awakener's Orb</div></td>
-            <td class="rate">20%</td><td class="price">1.50 div</td><td class="ev">0.30 div</td>
+            <td class="rate">20%</td><td class="price">2.20 div</td><td class="ev">0.44 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/c/c2/Orb_of_Dominance_inventory_icon.png" alt=""/>Orb of Dominance</div></td>
-            <td class="rate">5%</td><td class="price">1.90 div</td><td class="ev">0.10 div</td>
+            <td class="rate">5%</td><td class="price">6.60 div</td><td class="ev">0.33 div</td>
           </tr>
-          <tr><td colspan="4" class="cat-label">✨ Encounter-specific</td></tr>
+          <tr><td colspan="4" class="cat-label">Encounter-specific</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/d/d1/Cosmic_Reliquary_Key_inventory_icon.png" alt=""/>Oubliette Reliquary Key</div></td>
             <td class="rate">2%</td><td class="price">1.50 div</td><td class="ev">0.02 div</td>
@@ -198,50 +197,62 @@
 
     <div class="boss-card">
       <h2>Uber Maven</h2>
-      <div class="total-ev">EV: <span>3.92 div</span> / kill</div>
+      <div class="total-ev">EV: <span>3.36 div</span> / kill</div>
       <table>
         <thead>
           <tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr>
         </thead>
         <tbody>
-          <tr><td colspan="4" class="cat-label">🎲 Guaranteed Unique (1 per kill)</td></tr>
+          <tr><td colspan="4" class="cat-label">Guaranteed Unique (1 per kill)</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/6/66/Viridi%27s_Veil_inventory_icon.png" alt=""/>Viridi's Veil</div></td>
-            <td class="rate">52%</td><td class="price">0.02 div</td><td class="ev">0.01 div</td>
+            <td class="rate">52%</td><td class="price">0.01 div</td><td class="ev">0.01 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/5/5d/Impossible_Escape_inventory_icon.png" alt=""/>Impossible Escape (unid)</div></td>
-            <td class="rate">32%</td><td class="price">5.00 div</td><td class="ev">1.57 div</td>
+            <td class="rate">32%</td><td class="price">3.00 div</td><td class="ev">0.95 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/2/2e/Grace_of_the_Goddess_inventory_icon.png" alt=""/>Grace of the Goddess</div></td>
-            <td class="rate">14%</td><td class="price">5.00 div</td><td class="ev">0.70 div</td>
+            <td class="rate">14%</td><td class="price">3.00 div</td><td class="ev">0.42 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/5/54/Progenesis_inventory_icon.png" alt=""/>Progenesis</div></td>
-            <td class="rate">2%</td><td class="price">49.00 div</td><td class="ev">1.23 div</td>
+            <td class="rate">2%</td><td class="price">65.00 div</td><td class="ev">1.62 div</td>
           </tr>
-          <tr><td colspan="4" class="cat-label">✨ Encounter-specific</td></tr>
+          <tr><td colspan="4" class="cat-label">Encounter-specific</td></tr>
           <tr>
-            <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/1/1a/Awakened_Empower_Support_inventory_icon.png" alt=""/>Awakened Exceptional Support Gem</div></td>
+            <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/2/23/Awakened_Empower_Support_inventory_icon.png" alt=""/>Awakened Empower Support</div></td>
+            <td class="rate">0.5%</td><td class="price">—</td><td class="ev">—</td>
+          </tr>
+          <tr>
+            <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/3/32/Awakened_Enhance_Support_inventory_icon.png" alt=""/>Awakened Enhance Support</div></td>
+            <td class="rate">1%</td><td class="price">—</td><td class="ev">—</td>
+          </tr>
+          <tr>
+            <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/0/0d/Awakened_Enlighten_Support_inventory_icon.png" alt=""/>Awakened Enlighten Support</div></td>
+            <td class="rate">0.5%</td><td class="price">—</td><td class="ev">—</td>
+          </tr>
+          <tr>
+            <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/1/1a/Awakened_Empower_Support_inventory_icon.png" alt=""/>Eclipse Support</div></td>
             <td class="rate">2%</td><td class="price">—</td><td class="ev">—</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/d/d1/Cosmic_Reliquary_Key_inventory_icon.png" alt=""/>Shiny Reliquary Key</div></td>
-            <td class="rate">1%</td><td class="price">1.50 div</td><td class="ev">0.01 div</td>
+            <td class="rate">0.7%</td><td class="price">1.50 div</td><td class="ev">0.01 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/3/39/Curio_of_Decay_inventory_icon.png" alt=""/>Curio of Potential</div></td>
             <td class="rate">5%</td><td class="price">1.50 div</td><td class="ev">0.08 div</td>
           </tr>
-          <tr><td colspan="4" class="cat-label">📦 Additional Drops</td></tr>
+          <tr><td colspan="4" class="cat-label">Additional Drops</td></tr>
           <tr>
-            <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/d/dd/Orb_of_Conflict_inventory_icon.png" alt=""/>Orb of Conflict</div></td>
-            <td class="rate">32%</td><td class="price">0.80 div</td><td class="ev">0.26 div</td>
+            <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/1/1a/Awakened_Empower_Support_inventory_icon.png" alt=""/>Invert the Rules Support</div></td>
+            <td class="rate">10%</td><td class="price">—</td><td class="ev">—</td>
           </tr>
           <tr>
-            <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/8/83/Maven%27s_Writ_inventory_icon.png" alt=""/>Maven's Writ</div></td>
-            <td class="rate">10%</td><td class="price">0.60 div</td><td class="ev">0.06 div</td>
+            <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/d/dd/Orb_of_Conflict_inventory_icon.png" alt=""/>Orb of Conflict</div></td>
+            <td class="rate">32%</td><td class="price">0.88 div</td><td class="ev">0.28 div</td>
           </tr>
         </tbody>
       </table>
@@ -249,20 +260,20 @@
 
     <div class="boss-card">
       <h2>Uber Exarch</h2>
-      <div class="total-ev">EV: <span>0.63 div</span> / kill</div>
+      <div class="total-ev">EV: <span>0.79 div</span> / kill</div>
       <table>
         <thead>
           <tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr>
         </thead>
         <tbody>
-          <tr><td colspan="4" class="cat-label">🎲 Guaranteed Unique (1 per kill)</td></tr>
+          <tr><td colspan="4" class="cat-label">Guaranteed Unique (1 per kill)</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/5/58/The_Annihilating_Light_inventory_icon.png" alt=""/>The Annihilating Light</div></td>
-            <td class="rate">46%</td><td class="price">0.03 div</td><td class="ev">0.01 div</td>
+            <td class="rate">46%</td><td class="price">0.02 div</td><td class="ev">0.01 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/7/73/Annihilation%27s_Approach_inventory_icon.png" alt=""/>Annihilation's Approach</div></td>
-            <td class="rate">29%</td><td class="price">0.14 div</td><td class="ev">0.04 div</td>
+            <td class="rate">29%</td><td class="price">0.11 div</td><td class="ev">0.03 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/8/8a/Crystallised_Omniscience_inventory_icon.png" alt=""/>Crystallised Omniscience</div></td>
@@ -270,9 +281,13 @@
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/1/13/The_Celestial_Brace_inventory_icon.png" alt=""/>The Celestial Brace</div></td>
-            <td class="rate">2%</td><td class="price">25.00 div</td><td class="ev">0.38 div</td>
+            <td class="rate">2%</td><td class="price">14.00 div</td><td class="ev">0.21 div</td>
           </tr>
-          <tr><td colspan="4" class="cat-label">✨ Encounter-specific</td></tr>
+          <tr><td colspan="4" class="cat-label">Encounter-specific</td></tr>
+          <tr>
+            <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/8/82/Forbidden_Flame_inventory_icon.png" alt=""/>Forbidden Flame (unid)</div></td>
+            <td class="rate">5%</td><td class="price">7.55 div</td><td class="ev">0.38 div</td>
+          </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/d/d1/Cosmic_Reliquary_Key_inventory_icon.png" alt=""/>Archive Reliquary Key</div></td>
             <td class="rate">2%</td><td class="price">1.50 div</td><td class="ev">0.02 div</td>
@@ -281,26 +296,22 @@
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/3/39/Curio_of_Decay_inventory_icon.png" alt=""/>Curio of Absorption</div></td>
             <td class="rate">5%</td><td class="price">1.50 div</td><td class="ev">0.08 div</td>
           </tr>
-          <tr><td colspan="4" class="cat-label">📦 Additional Drops</td></tr>
+          <tr><td colspan="4" class="cat-label">Additional Drops</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/6/60/Exceptional_Eldritch_Ember_inventory_icon.png" alt=""/>Exceptional Eldritch Ember</div></td>
-            <td class="rate">15%</td><td class="price">0.10 div</td><td class="ev">0.01 div</td>
+            <td class="rate">15%</td><td class="price">0.27 div</td><td class="ev">0.04 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/5/58/Eldritch_Orb_of_Annulment_inventory_icon.png" alt=""/>Eldritch Orb of Annulment</div></td>
-            <td class="rate">5%</td><td class="price">0.05 div</td><td class="ev">0.00 div</td>
+            <td class="rate">5%</td><td class="price">0.15 div</td><td class="ev">0.01 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/9/95/Eldritch_Chaos_Orb_inventory_icon.png" alt=""/>Eldritch Chaos Orb</div></td>
-            <td class="rate">5%</td><td class="price">0.05 div</td><td class="ev">0.00 div</td>
+            <td class="rate">5%</td><td class="price">0.23 div</td><td class="ev">0.01 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/1/14/Eldritch_Exalted_Orb_inventory_icon.png" alt=""/>Eldritch Exalted Orb</div></td>
-            <td class="rate">5%</td><td class="price">0.05 div</td><td class="ev">0.00 div</td>
-          </tr>
-          <tr>
-            <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/8/82/Forbidden_Flame_inventory_icon.png" alt=""/>Forbidden Flame</div></td>
-            <td class="rate">5%</td><td class="price">1.50 div</td><td class="ev">0.08 div</td>
+            <td class="rate">5%</td><td class="price">0.01 div</td><td class="ev">0.00 div</td>
           </tr>
         </tbody>
       </table>
@@ -308,26 +319,30 @@
 
     <div class="boss-card">
       <h2>Uber Eater</h2>
-      <div class="total-ev">EV: <span>0.94 div</span> / kill</div>
+      <div class="total-ev">EV: <span>0.95 div</span> / kill</div>
       <table>
         <thead>
           <tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr>
         </thead>
         <tbody>
-          <tr><td colspan="4" class="cat-label">🎲 Guaranteed Unique (1 per kill)</td></tr>
+          <tr><td colspan="4" class="cat-label">Guaranteed Unique (1 per kill)</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/6/60/Ravenous_Passion_inventory_icon.png" alt=""/>Ravenous Passion</div></td>
             <td class="rate">68%</td><td class="price">0.01 div</td><td class="ev">0.01 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/8/89/Ashes_of_the_Stars_inventory_icon.png" alt=""/>Ashes of the Stars</div></td>
-            <td class="rate">30%</td><td class="price">0.41 div</td><td class="ev">0.12 div</td>
+            <td class="rate">30%</td><td class="price">0.28 div</td><td class="ev">0.08 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/9/9f/Nimis_inventory_icon.png" alt=""/>Nimis</div></td>
-            <td class="rate">2%</td><td class="price">31.00 div</td><td class="ev">0.62 div</td>
+            <td class="rate">2%</td><td class="price">28.00 div</td><td class="ev">0.56 div</td>
           </tr>
-          <tr><td colspan="4" class="cat-label">✨ Encounter-specific</td></tr>
+          <tr><td colspan="4" class="cat-label">Encounter-specific</td></tr>
+          <tr>
+            <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/7/7f/Forbidden_Flesh_inventory_icon.png" alt=""/>Forbidden Flesh (unid)</div></td>
+            <td class="rate">5%</td><td class="price">3.00 div</td><td class="ev">0.15 div</td>
+          </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/d/d1/Cosmic_Reliquary_Key_inventory_icon.png" alt=""/>Visceral Reliquary Key</div></td>
             <td class="rate">1%</td><td class="price">1.50 div</td><td class="ev">0.01 div</td>
@@ -336,26 +351,22 @@
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/3/39/Curio_of_Decay_inventory_icon.png" alt=""/>Curio of Consumption</div></td>
             <td class="rate">5%</td><td class="price">1.50 div</td><td class="ev">0.08 div</td>
           </tr>
-          <tr><td colspan="4" class="cat-label">📦 Additional Drops</td></tr>
+          <tr><td colspan="4" class="cat-label">Additional Drops</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/8/89/Exceptional_Eldritch_Ichor_inventory_icon.png" alt=""/>Exceptional Eldritch Ichor</div></td>
-            <td class="rate">15%</td><td class="price">0.10 div</td><td class="ev">0.01 div</td>
+            <td class="rate">15%</td><td class="price">0.27 div</td><td class="ev">0.04 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/5/58/Eldritch_Orb_of_Annulment_inventory_icon.png" alt=""/>Eldritch Orb of Annulment</div></td>
-            <td class="rate">5%</td><td class="price">0.05 div</td><td class="ev">0.00 div</td>
+            <td class="rate">5%</td><td class="price">0.15 div</td><td class="ev">0.01 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/9/95/Eldritch_Chaos_Orb_inventory_icon.png" alt=""/>Eldritch Chaos Orb</div></td>
-            <td class="rate">5%</td><td class="price">0.05 div</td><td class="ev">0.00 div</td>
+            <td class="rate">5%</td><td class="price">0.23 div</td><td class="ev">0.01 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/1/14/Eldritch_Exalted_Orb_inventory_icon.png" alt=""/>Eldritch Exalted Orb</div></td>
-            <td class="rate">5%</td><td class="price">0.05 div</td><td class="ev">0.00 div</td>
-          </tr>
-          <tr>
-            <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/7/7f/Forbidden_Flesh_inventory_icon.png" alt=""/>Forbidden Flesh</div></td>
-            <td class="rate">5%</td><td class="price">1.50 div</td><td class="ev">0.08 div</td>
+            <td class="rate">5%</td><td class="price">0.01 div</td><td class="ev">0.00 div</td>
           </tr>
         </tbody>
       </table>
@@ -363,20 +374,20 @@
 
     <div class="boss-card">
       <h2>Uber Cortex</h2>
-      <div class="total-ev">EV: <span>0.79 div</span> / kill</div>
+      <div class="total-ev">EV: <span>0.69 div</span> / kill</div>
       <table>
         <thead>
           <tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr>
         </thead>
         <tbody>
-          <tr><td colspan="4" class="cat-label">🎲 Guaranteed Unique (1 per kill)</td></tr>
+          <tr><td colspan="4" class="cat-label">Guaranteed Unique (1 per kill)</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/3/3e/Nebulis_inventory_icon.png" alt=""/>Nebulis</div></td>
-            <td class="rate">34%</td><td class="price">0.45 div</td><td class="ev">0.15 div</td>
+            <td class="rate">34%</td><td class="price">0.18 div</td><td class="ev">0.06 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/9/99/Mask_of_the_Tribunal_inventory_icon.png" alt=""/>Mask of the Tribunal (unid)</div></td>
-            <td class="rate">34%</td><td class="price">0.09 div</td><td class="ev">0.03 div</td>
+            <td class="rate">34%</td><td class="price">0.07 div</td><td class="ev">0.02 div</td>
           </tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/4/4c/Circle_of_Ambition_inventory_icon.png" alt=""/>Circle of Ambition (unid)</div></td>
@@ -390,17 +401,17 @@
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/7/7f/Rational_Doctrine_inventory_icon.png" alt=""/>Rational Doctrine (unid)</div></td>
             <td class="rate">5%</td><td class="price">3.00 div</td><td class="ev">0.15 div</td>
           </tr>
-          <tr><td colspan="4" class="cat-label">✨ Encounter-specific</td></tr>
+          <tr><td colspan="4" class="cat-label">Encounter-specific</td></tr>
           <tr>
             <td><div class="item-cell"><img class="item-icon" src="https://www.poewiki.net/images/d/d1/Cosmic_Reliquary_Key_inventory_icon.png" alt=""/>Forgotten Reliquary Key</div></td>
             <td class="rate">2%</td><td class="price">1.50 div</td><td class="ev">0.02 div</td>
           </tr>
-          <tr><td colspan="4" class="cat-label">📦 Additional Drops</td></tr>
+          <tr><td colspan="4" class="cat-label">Additional Drops</td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="last-updated">Last updated: 2026-07-02 | Prices from: 2026-07-02 | Data: poewiki.net + poe.ninja + PoE Trade API</div>
+    <div class="last-updated">Prices: 2026-07-03 | Data: poewiki.net + poe.ninja + PoE Trade API (Lambda proxy)</div>
   </div>
 </body>
 </html>
