@@ -223,7 +223,7 @@ function toggleDetail(id) {
     btn.textContent = '\u25BC';
   }
 }
-let nameAsc = true;
+let nameDesc = true;
 let evDesc = true;
 function sortRows(compareFn) {
   var tbody = document.querySelector('#boss-table tbody');
@@ -239,10 +239,10 @@ function sortByName() {
   sortRows(function(a, b) {
     var na = a.querySelector('.boss-name').textContent.trim();
     var nb = b.querySelector('.boss-name').textContent.trim();
-    return nameAsc ? na.localeCompare(nb) : nb.localeCompare(na);
+    return nameDesc ? nb.localeCompare(na) : na.localeCompare(nb);
   });
-  nameAsc = !nameAsc;
-  document.getElementById('arrow-name').textContent = nameAsc ? '\u25B2' : '\u25BC';
+  nameDesc = !nameDesc;
+  document.getElementById('arrow-name').textContent = nameDesc ? '\u25BC' : '\u25B2';
   document.getElementById('arrow-ev').textContent = '\u25BC';
 }
 function sortByEV() {
