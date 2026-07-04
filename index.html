@@ -43,8 +43,8 @@ table#boss-table{width:100%;border-collapse:collapse;font-size:.85rem}
 <p class="subtitle">Expected value per kill — Ancestors league. Sorted by EV. Click boss to expand.</p>
 <table id="boss-table">
 <thead><tr>
-<th onclick="sortTable()">Boss <span class="sort-arrow">▼</span></th>
-<th style="text-align:right" onclick="sortTable()">EV / Kill <span class="sort-arrow">▼</span></th>
+<th onclick="sortByName()">Boss <span class="sort-arrow" id="arrow-name">▼</span></th>
+<th style="text-align:right" onclick="sortByEV()">EV / Kill <span class="sort-arrow" id="arrow-ev">▼</span></th>
 </tr></thead>
 <tbody>
 
@@ -217,29 +217,43 @@ function toggleDetail(id) {
   var btn = document.getElementById('btn-' + id);
   if (row.classList.contains('open')) {
     row.classList.remove('open');
-    btn.textContent = '▶';
+    btn.textContent = '\u25B6';
   } else {
     row.classList.add('open');
-    btn.textContent = '▼';
+    btn.textContent = '\u25BC';
   }
 }
-let sortDesc = true;
-function sortTable() {
+let nameAsc = true;
+let evDesc = true;
+function sortRows(compareFn) {
   var tbody = document.querySelector('#boss-table tbody');
   var rows = Array.from(tbody.querySelectorAll('tr.boss-row'));
-  rows.sort(function(a, b) {
-    var evA = parseFloat(a.querySelector('.boss-ev span').textContent);
-    var evB = parseFloat(b.querySelector('.boss-ev span').textContent);
-    return sortDesc ? evB - evA : evA - evB;
-  });
-  sortDesc = !sortDesc;
-  var arrow = document.querySelector('#boss-table th .sort-arrow');
-  arrow.textContent = sortDesc ? '▼' : '▲';
+  rows.sort(compareFn);
   rows.forEach(function(bossRow) {
     var detailRow = bossRow.nextElementSibling;
     tbody.appendChild(bossRow);
     tbody.appendChild(detailRow);
   });
+}
+function sortByName() {
+  sortRows(function(a, b) {
+    var na = a.querySelector('.boss-name').textContent.trim();
+    var nb = b.querySelector('.boss-name').textContent.trim();
+    return nameAsc ? na.localeCompare(nb) : nb.localeCompare(na);
+  });
+  nameAsc = !nameAsc;
+  document.getElementById('arrow-name').textContent = nameAsc ? '\u25B2' : '\u25BC';
+  document.getElementById('arrow-ev').textContent = '\u25BC';
+}
+function sortByEV() {
+  sortRows(function(a, b) {
+    var evA = parseFloat(a.querySelector('.boss-ev span').textContent);
+    var evB = parseFloat(b.querySelector('.boss-ev span').textContent);
+    return evDesc ? evB - evA : evA - evB;
+  });
+  evDesc = !evDesc;
+  document.getElementById('arrow-ev').textContent = evDesc ? '\u25BC' : '\u25B2';
+  document.getElementById('arrow-name').textContent = '\u25BC';
 }
 </script>
 </body>
