@@ -6,35 +6,36 @@
 <title>PoE Uber Boss EV</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#c8c8d4;min-height:100vh}
-.container{max-width:900px;margin:0 auto;padding:24px 16px}
-h1{color:#ffd700;font-size:1.8rem;margin-bottom:6px}
-.subtitle{color:#888;margin-bottom:20px;font-size:.85rem}
+body{font-family:system-ui,-apple-system,sans-serif;background:#0a0a0a;color:#ccc;min-height:100vh}
+.container{max-width:900px;margin:0 auto;padding:28px 16px}
+h1{color:#4caf50;font-size:1.8rem;margin-bottom:4px;font-weight:700;letter-spacing:-0.5px}
+.subtitle{color:#666;margin-bottom:24px;font-size:.82rem}
 table#boss-table{width:100%;border-collapse:collapse;font-size:.85rem}
-#boss-table th{text-align:left;padding:8px 10px;border-bottom:2px solid #444;color:#888;font-weight:600;font-size:.75rem;text-transform:uppercase;cursor:pointer;user-select:none}
-#boss-table th:hover{color:#ffd700}
-#boss-table th .sort-arrow{font-size:.65rem;margin-left:4px}
-.boss-row{cursor:pointer;transition:background .15s}
-.boss-row:hover{background:#1e1e34}
-.boss-row td{padding:10px;border-bottom:1px solid #2a2a3e}
-.boss-row .expand-btn{width:28px;text-align:center;color:#888;font-size:.85rem;transition:transform .2s}
-.boss-row .boss-name{color:#e0e0e0;font-weight:600;font-size:.95rem}
-.boss-row .boss-ev{color:#7cff7c;text-align:right;font-weight:600;font-size:.95rem}
-.boss-row .boss-ev span{color:#ffd700}
+#boss-table th{text-align:left;padding:10px 12px;border-bottom:2px solid #333;color:#999;font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:1px;cursor:pointer;user-select:none}
+#boss-table th:hover{color:#4caf50}
+#boss-table th .sort-arrow{font-size:.65rem;margin-left:4px;color:#4caf50}
+.boss-row{cursor:pointer;transition:background .12s}
+.boss-row:hover{background:#141414}
+.boss-row td{padding:12px;border-bottom:1px solid #1a1a1a}
+.boss-row .expand-btn{width:24px;text-align:center;color:#555;font-size:.8rem}
+.boss-row .boss-name{color:#ddd;font-weight:600;font-size:.95rem}
+.boss-row .boss-ev{color:#4caf50;text-align:right;font-weight:700;font-size:1rem}
+.boss-row .boss-ev span{color:#4caf50}
 .detail-row{display:none}
 .detail-row.open{display:table-row}
-.detail-row td{padding:0 10px 16px 48px;border-bottom:1px solid #2a2a3e}
-.detail-table{width:100%;border-collapse:collapse;font-size:.8rem;margin-top:8px}
-.detail-table th{text-align:left;padding:4px 6px;border-bottom:1px solid #333;color:#666;font-weight:500;font-size:.7rem;text-transform:uppercase;cursor:default!important}
-.detail-table td{padding:3px 6px;border-bottom:1px solid #1e1e2e}
-.detail-table tr:hover{background:#1a1a2e}
-.cat-label{color:#888;font-size:.75rem;font-weight:500;padding-top:8px!important}
+.detail-row td{padding:0 12px 18px 48px;border-bottom:1px solid #1a1a1a}
+.detail-table{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:6px}
+.detail-table th{text-align:left;padding:4px 6px;border-bottom:1px solid #222;color:#555;font-weight:500;font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;cursor:default!important}
+.detail-table th:hover{color:#555!important}
+.detail-table td{padding:4px 6px;border-bottom:1px solid #111}
+.detail-table tr:hover{background:#111}
+.cat-label{color:#666;font-size:.72rem;font-weight:600;padding-top:10px!important;letter-spacing:.5px}
 .item-cell{display:flex;align-items:center;gap:6px}
 .item-icon{width:20px;height:20px;flex-shrink:0;object-fit:contain}
-.rate{color:#999;text-align:center;font-size:.78rem}
-.price{color:#7cff7c;text-align:right}
-.ev{color:#ffd700;text-align:right;font-weight:500}
-.last-updated{color:#555;font-size:.75rem;text-align:center;margin-top:24px;padding-top:12px;border-top:1px solid #222}
+.rate{color:#777;text-align:center;font-size:.76rem}
+.price{color:#4caf50;text-align:right;font-weight:500}
+.ev{color:#81c784;text-align:right;font-weight:500}
+.last-updated{color:#444;font-size:.7rem;text-align:center;margin-top:28px;padding-top:14px;border-top:1px solid #1a1a1a}
 </style>
 </head>
 <body>
