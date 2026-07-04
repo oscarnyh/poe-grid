@@ -6,42 +6,52 @@
 <title>PoE Grid</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,-apple-system,sans-serif;background:#fff;color:#333;min-height:100vh}
-.container{max-width:900px;margin:0 auto;padding:28px 16px}
-h1{color:#2e7d32;font-size:1.8rem;margin-bottom:4px;font-weight:700;letter-spacing:-0.5px}
-.subtitle{color:#999;margin-bottom:24px;font-size:.82rem}
-table#boss-table{width:100%;border-collapse:collapse;font-size:.85rem}
-#boss-table th{text-align:left;padding:10px 12px;border-bottom:2px solid #e0e0e0;color:#999;font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:1px;cursor:pointer;user-select:none}
-#boss-table th:hover{color:#2e7d32}
-#boss-table th .sort-arrow{font-size:.65rem;margin-left:4px;color:#2e7d32}
-.boss-row{cursor:pointer;transition:background .12s}
-.boss-row:hover{background:#f5f5f5}
-.boss-row td{padding:12px;border-bottom:1px solid #eee}
-.boss-row .expand-btn{width:24px;text-align:center;color:#bbb;font-size:.8rem}
-.boss-row .boss-name{color:#222;font-weight:600;font-size:.95rem}
-.boss-row .boss-ev{color:#2e7d32;text-align:right;font-weight:700;font-size:1rem}
-.boss-row .boss-ev span{color:#2e7d32}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#f4f5f7;color:#1a1a1a;min-height:100vh;-webkit-font-smoothing:antialiased}
+.container{max-width:920px;margin:0 auto;padding:40px 20px}
+header{margin-bottom:32px}
+h1{color:#00664f;font-size:1.6rem;font-weight:700;letter-spacing:-0.3px;margin-bottom:4px}
+.subtitle{color:#8a8d91;font-size:.8rem;font-weight:400}
+.card{background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);overflow:hidden}
+table#boss-table{width:100%;border-collapse:collapse;font-size:.84rem}
+#boss-table thead{background:#fafbfc}
+#boss-table th{text-align:left;padding:12px 16px;border-bottom:1px solid #e8eaed;color:#5f6368;font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;cursor:pointer;user-select:none}
+#boss-table th:hover{color:#00664f}
+#boss-table th .sort-arrow{font-size:.6rem;margin-left:3px;color:#00664f;opacity:.7}
+.boss-row{cursor:pointer;transition:background .15s}
+.boss-row:hover{background:#f8faf9}
+.boss-row td{padding:14px 16px;border-bottom:1px solid #f0f2f5}
+.boss-row:last-child td{border-bottom:none}
+.boss-row .expand-btn{display:inline-block;width:20px;text-align:center;color:#bdc1c6;font-size:.75rem;margin-right:4px}
+.boss-row .boss-name{color:#202124;font-weight:600;font-size:.92rem}
+.boss-row .boss-ev{color:#00664f;text-align:right;font-weight:700;font-size:.95rem;font-variant-numeric:tabular-nums}
+.boss-row .boss-ev span{color:#00664f}
 .detail-row{display:none}
 .detail-row.open{display:table-row}
-.detail-row td{padding:0 12px 18px 48px;border-bottom:1px solid #eee}
-.detail-table{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:6px}
-.detail-table th{text-align:left;padding:4px 6px;border-bottom:1px solid #e8e8e8;color:#aaa;font-weight:500;font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;cursor:default!important}
-.detail-table th:hover{color:#aaa!important}
-.detail-table td{padding:4px 6px;border-bottom:1px solid #f0f0f0}
-.detail-table tr:hover{background:#fafafa}
-.cat-label{color:#999;font-size:.72rem;font-weight:600;padding-top:10px!important;letter-spacing:.5px}
-.item-cell{display:flex;align-items:center;gap:6px}
-.item-icon{width:20px;height:20px;flex-shrink:0;object-fit:contain}
-.rate{color:#aaa;text-align:center;font-size:.76rem}
-.price{color:#2e7d32;text-align:right;font-weight:500}
-.ev{color:#43a047;text-align:right;font-weight:500}
-.last-updated{color:#ccc;font-size:.7rem;text-align:center;margin-top:28px;padding-top:14px;border-top:1px solid #eee}
+.detail-row td{padding:0 16px 20px 56px;border-bottom:1px solid #f0f2f5}
+.detail-row:last-child td{border-bottom:none}
+.detail-table{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:4px;background:#fafbfc;border-radius:6px;overflow:hidden}
+.detail-table th{text-align:left;padding:8px 10px;border-bottom:1px solid #e8eaed;color:#80868b;font-weight:600;font-size:.65rem;text-transform:uppercase;letter-spacing:.6px;cursor:default!important;background:#fafbfc}
+.detail-table th:hover{color:#80868b!important}
+.detail-table td{padding:6px 10px;border-bottom:1px solid #f0f2f5}
+.detail-table tr:last-child td{border-bottom:none}
+.detail-table tr:hover{background:#f0f4f1}
+.cat-label{color:#80868b;font-size:.7rem;font-weight:600;padding-top:12px!important;letter-spacing:.4px;text-transform:uppercase}
+.item-cell{display:flex;align-items:center;gap:8px}
+.item-icon{width:22px;height:22px;flex-shrink:0;object-fit:contain;border-radius:3px}
+.rate{color:#9aa0a6;text-align:center;font-size:.76rem;font-variant-numeric:tabular-nums}
+.price{color:#00664f;text-align:right;font-weight:500;font-variant-numeric:tabular-nums}
+.ev{color:#1e8e3e;text-align:right;font-weight:500;font-variant-numeric:tabular-nums}
+footer{text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid #e8eaed}
+.last-updated{color:#bdc1c6;font-size:.7rem}
 </style>
 </head>
 <body>
 <div class="container">
+<header>
 <h1>PoE Grid</h1>
 <p class="subtitle">Expected value per kill — Ancestors league. Sorted by EV. Click boss to expand.</p>
+</header>
+<div class="card">
 <table id="boss-table">
 <thead><tr>
 <th onclick="sortByName()">Boss <span class="sort-arrow" id="arrow-name"></span></th>
@@ -210,7 +220,10 @@ table#boss-table{width:100%;border-collapse:collapse;font-size:.85rem}
 <tr><td colspan="4" class="cat-label">Additional Drops</td></tr>
 </tbody></table></td></tr>
 </tbody></table>
+</div>
+<footer>
 <div class="last-updated">Prices: 2026-07-03 | Data: poewiki + poe.ninja + Trade API (Lambda)</div>
+</footer>
 </div>
 <script>
 function toggleDetail(id) {
