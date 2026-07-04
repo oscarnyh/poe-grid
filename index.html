@@ -1,5 +1,87 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>PoE Uber Boss EV</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#c8c8d4;min-height:100vh}.container{max-width:800px;margin:0 auto;padding:32px 20px}h1{color:#ffd700;font-size:2rem;margin-bottom:8px}.subtitle{color:#888;margin-bottom:32px;font-size:.9rem}.boss-card{background:#1a1a2e;border-radius:12px;padding:24px;margin-bottom:24px;border:1px solid #2a2a3e}.boss-card h2{color:#ffd700;margin-bottom:8px;font-size:1.3rem}.boss-card .total-ev{color:#7cff7c;font-size:1.1rem;margin-bottom:16px;padding:8px 12px;background:#0f0f1a;border-radius:6px;display:inline-block}.boss-card .total-ev span{color:#ffd700}table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:8px}th{text-align:left;padding:6px 8px;border-bottom:1px solid #333;color:#888;font-weight:500;font-size:.75rem;text-transform:uppercase}td{padding:5px 8px;border-bottom:1px solid #222}tr:hover{background:#1e1e34}.cat-label{color:#aaa;font-size:.8rem;font-weight:500;padding-top:12px!important}.item-cell{display:flex;align-items:center;gap:8px}.item-icon{width:24px;height:24px;flex-shrink:0;object-fit:contain}.rate{color:#aaa;text-align:center}.price{color:#7cff7c;text-align:right}.ev{color:#ffd700;text-align:right;font-weight:500}.last-updated{color:#666;font-size:.8rem;text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid #222}</style></head><body><div class="container"><h1>PoE Uber Boss EV</h1><p class="subtitle">Expected value per kill — Ancestors league</p>
-<div class="boss-card"><h2>Uber Shaper</h2><div class="total-ev">EV: <span>3.15 div</span> / kill</div><table><thead><tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr></thead><tbody>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PoE Uber Boss EV</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#c8c8d4;min-height:100vh}
+.container{max-width:900px;margin:0 auto;padding:24px 16px}
+h1{color:#ffd700;font-size:1.8rem;margin-bottom:6px}
+.subtitle{color:#888;margin-bottom:20px;font-size:.85rem}
+table#boss-table{width:100%;border-collapse:collapse;font-size:.85rem}
+#boss-table th{text-align:left;padding:8px 10px;border-bottom:2px solid #444;color:#888;font-weight:600;font-size:.75rem;text-transform:uppercase;cursor:pointer;user-select:none}
+#boss-table th:hover{color:#ffd700}
+#boss-table th .sort-arrow{font-size:.65rem;margin-left:4px}
+.boss-row{cursor:pointer;transition:background .15s}
+.boss-row:hover{background:#1e1e34}
+.boss-row td{padding:10px;border-bottom:1px solid #2a2a3e}
+.boss-row .expand-btn{width:28px;text-align:center;color:#888;font-size:.85rem;transition:transform .2s}
+.boss-row .boss-name{color:#e0e0e0;font-weight:600;font-size:.95rem}
+.boss-row .boss-ev{color:#7cff7c;text-align:right;font-weight:600;font-size:.95rem}
+.boss-row .boss-ev span{color:#ffd700}
+.detail-row{display:none}
+.detail-row.open{display:table-row}
+.detail-row td{padding:0 10px 16px 48px;border-bottom:1px solid #2a2a3e}
+.detail-table{width:100%;border-collapse:collapse;font-size:.8rem;margin-top:8px}
+.detail-table th{text-align:left;padding:4px 6px;border-bottom:1px solid #333;color:#666;font-weight:500;font-size:.7rem;text-transform:uppercase;cursor:default!important}
+.detail-table td{padding:3px 6px;border-bottom:1px solid #1e1e2e}
+.detail-table tr:hover{background:#1a1a2e}
+.cat-label{color:#888;font-size:.75rem;font-weight:500;padding-top:8px!important}
+.item-cell{display:flex;align-items:center;gap:6px}
+.item-icon{width:20px;height:20px;flex-shrink:0;object-fit:contain}
+.rate{color:#999;text-align:center;font-size:.78rem}
+.price{color:#7cff7c;text-align:right}
+.ev{color:#ffd700;text-align:right;font-weight:500}
+.last-updated{color:#555;font-size:.75rem;text-align:center;margin-top:24px;padding-top:12px;border-top:1px solid #222}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>PoE Uber Boss EV</h1>
+<p class="subtitle">Expected value per kill — Ancestors league. Sorted by EV. Click boss to expand.</p>
+<table id="boss-table">
+<thead><tr>
+<th onclick="sortTable()">Boss <span class="sort-arrow">▼</span></th>
+<th style="text-align:right" onclick="sortTable()">EV / Kill <span class="sort-arrow">▼</span></th>
+</tr></thead>
+<tbody>
+
+<tr class="boss-row" onclick="toggleDetail('maven-uber')">
+<td><span class="expand-btn" id="btn-maven-uber">▶</span> <span class="boss-name">Uber Maven</span></td>
+<td class="boss-ev"><span>4.46 div</span> / kill</td>
+</tr>
+<tr class="detail-row" id="detail-maven-uber">
+<td colspan="2">
+<table class="detail-table">
+<thead><tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr></thead>
+<tbody>
+<tr><td colspan="4" class="cat-label">Guaranteed Unique (1 per kill)</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Viridis_Veil.png" alt=""/>Viridi's Veil</div></td><td class="rate">52%</td><td class="price">0.01 div</td><td class="ev">0.01 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Impossible_Escape.png" alt=""/>Impossible Escape (unid)</div></td><td class="rate">32%</td><td class="price">3.00 div</td><td class="ev">0.95 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Grace_of_the_Goddess.png" alt=""/>Grace of the Goddess</div></td><td class="rate">14%</td><td class="price">4.00 div</td><td class="ev">0.56 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Progenesis.png" alt=""/>Progenesis</div></td><td class="rate">2%</td><td class="price">65.00 div</td><td class="ev">1.62 div</td></tr>
+<tr><td colspan="4" class="cat-label">Encounter-specific</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Awakened_Empower_Support.png" alt=""/>Awakened Empower Support</div></td><td class="rate">0.5%</td><td class="price">12.00 div</td><td class="ev">0.06 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Awakened_Enhance_Support.png" alt=""/>Awakened Enhance Support</div></td><td class="rate">1%</td><td class="price">9.00 div</td><td class="ev">0.09 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Awakened_Enlighten_Support.png" alt=""/>Awakened Enlighten Support</div></td><td class="rate">0.5%</td><td class="price">30.00 div</td><td class="ev">0.15 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Eclipse_Support.png" alt=""/>Eclipse Support</div></td><td class="rate">2%</td><td class="price">15.00 div</td><td class="ev">0.30 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Shiny_Reliquary_Key.png" alt=""/>Shiny Reliquary Key</div></td><td class="rate">0.7%</td><td class="price">1.50 div</td><td class="ev">0.01 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Curio_of_Potential.png" alt=""/>Curio of Potential</div></td><td class="rate">5%</td><td class="price">1.50 div</td><td class="ev">0.08 div</td></tr>
+<tr><td colspan="4" class="cat-label">Additional Drops</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Invert_the_Rules_Support.png" alt=""/>Invert the Rules Support</div></td><td class="rate">10%</td><td class="price">3.60 div</td><td class="ev">0.36 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Orb_of_Conflict.png" alt=""/>Orb of Conflict</div></td><td class="rate">32%</td><td class="price">0.86 div</td><td class="ev">0.28 div</td></tr>
+</tbody></table></td></tr>
+<tr class="boss-row" onclick="toggleDetail('shaper-uber')">
+<td><span class="expand-btn" id="btn-shaper-uber">▶</span> <span class="boss-name">Uber Shaper</span></td>
+<td class="boss-ev"><span>3.15 div</span> / kill</td>
+</tr>
+<tr class="detail-row" id="detail-shaper-uber">
+<td colspan="2">
+<table class="detail-table">
+<thead><tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr></thead>
+<tbody>
 <tr><td colspan="4" class="cat-label">Guaranteed Unique (1 per kill)</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Echoes_of_Creation.png" alt=""/>Echoes of Creation</div></td><td class="rate">40%</td><td class="price">0.01 div</td><td class="ev">0.00 div</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Entropic_Devastation.png" alt=""/>Entropic Devastation</div></td><td class="rate">36%</td><td class="price">0.11 div</td><td class="ev">0.04 div</td></tr>
@@ -13,8 +95,16 @@
 <tr><td colspan="4" class="cat-label">Encounter-specific</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Sublime_Vision.png" alt=""/>Sublime Vision (unid)</div></td><td class="rate">2%</td><td class="price">34.00 div</td><td class="ev">0.68 div</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Cosmic_Reliquary_Key.png" alt=""/>Cosmic Reliquary Key</div></td><td class="rate">1%</td><td class="price">10.00 div</td><td class="ev">0.10 div</td></tr>
-</tbody></table></div>
-<div class="boss-card"><h2>Uber Uber Elder</h2><div class="total-ev">EV: <span>2.39 div</span> / kill</div><table><thead><tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr></thead><tbody>
+</tbody></table></td></tr>
+<tr class="boss-row" onclick="toggleDetail('elder-uber')">
+<td><span class="expand-btn" id="btn-elder-uber">▶</span> <span class="boss-name">Uber Uber Elder</span></td>
+<td class="boss-ev"><span>2.39 div</span> / kill</td>
+</tr>
+<tr class="detail-row" id="detail-elder-uber">
+<td colspan="2">
+<table class="detail-table">
+<thead><tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr></thead>
+<tbody>
 <tr><td colspan="4" class="cat-label">Guaranteed Unique (1 per kill)</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Call_of_the_Void.png" alt=""/>Call of the Void</div></td><td class="rate">40%</td><td class="price">0.04 div</td><td class="ev">0.02 div</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/The_Devourer_of_Minds.png" alt=""/>The Devourer of Minds</div></td><td class="rate">30%</td><td class="price">0.02 div</td><td class="ev">0.01 div</td></tr>
@@ -31,37 +121,59 @@
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Sublime_Vision.png" alt=""/>Sublime Vision (unid)</div></td><td class="rate">1%</td><td class="price">34.00 div</td><td class="ev">0.34 div</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Decaying_Reliquary_Key.png" alt=""/>Decaying Reliquary Key</div></td><td class="rate">2%</td><td class="price">1.50 div</td><td class="ev">0.02 div</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Curio_of_Decay.png" alt=""/>Curio of Decay</div></td><td class="rate">5%</td><td class="price">1.50 div</td><td class="ev">0.08 div</td></tr>
-</tbody></table></div>
-<div class="boss-card"><h2>Uber Sirus</h2><div class="total-ev">EV: <span>1.39 div</span> / kill</div><table><thead><tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr></thead><tbody>
+</tbody></table></td></tr>
+<tr class="boss-row" onclick="toggleDetail('sirus-uber')">
+<td><span class="expand-btn" id="btn-sirus-uber">▶</span> <span class="boss-name">Uber Sirus</span></td>
+<td class="boss-ev"><span>1.39 div</span> / kill</td>
+</tr>
+<tr class="detail-row" id="detail-sirus-uber">
+<td colspan="2">
+<table class="detail-table">
+<thead><tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr></thead>
+<tbody>
 <tr><td colspan="4" class="cat-label">Guaranteed Unique (1 per kill)</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Thread_of_Hope.png" alt=""/>Thread of Hope</div></td><td class="rate">55%</td><td class="price">0.18 div</td><td class="ev">0.10 div</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/The_Tempest_Rising.png" alt=""/>The Tempest Rising</div></td><td class="rate">37%</td><td class="price">0.01 div</td><td class="ev">0.00 div</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Oriaths_End.png" alt=""/>Oriath's End</div></td><td class="rate">8%</td><td class="price">6.00 div</td><td class="ev">0.45 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/The_Saviour.png" alt=""/>The Saviour</div></td><td class="rate">0%</td><td class="price">11.00 div</td><td class="ev">0.06 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/The_Saviour.png" alt=""/>The Saviour</div></td><td class="rate">0.5%</td><td class="price">11.00 div</td><td class="ev">0.06 div</td></tr>
 <tr><td colspan="4" class="cat-label">Additional Drops</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Awakeners_Orb.png" alt=""/>Awakener's Orb</div></td><td class="rate">20%</td><td class="price">2.10 div</td><td class="ev">0.42 div</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Orb_of_Dominance.png" alt=""/>Orb of Dominance</div></td><td class="rate">5%</td><td class="price">6.70 div</td><td class="ev">0.34 div</td></tr>
 <tr><td colspan="4" class="cat-label">Encounter-specific</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Oubliette_Reliquary_Key.png" alt=""/>Oubliette Reliquary Key</div></td><td class="rate">2%</td><td class="price">1.50 div</td><td class="ev">0.02 div</td></tr>
-</tbody></table></div>
-<div class="boss-card"><h2>Uber Maven</h2><div class="total-ev">EV: <span>4.46 div</span> / kill</div><table><thead><tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr></thead><tbody>
+</tbody></table></td></tr>
+<tr class="boss-row" onclick="toggleDetail('eater-uber')">
+<td><span class="expand-btn" id="btn-eater-uber">▶</span> <span class="boss-name">Uber Eater</span></td>
+<td class="boss-ev"><span>0.99 div</span> / kill</td>
+</tr>
+<tr class="detail-row" id="detail-eater-uber">
+<td colspan="2">
+<table class="detail-table">
+<thead><tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr></thead>
+<tbody>
 <tr><td colspan="4" class="cat-label">Guaranteed Unique (1 per kill)</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Viridis_Veil.png" alt=""/>Viridi's Veil</div></td><td class="rate">52%</td><td class="price">0.01 div</td><td class="ev">0.01 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Impossible_Escape.png" alt=""/>Impossible Escape (unid)</div></td><td class="rate">32%</td><td class="price">3.00 div</td><td class="ev">0.95 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Grace_of_the_Goddess.png" alt=""/>Grace of the Goddess</div></td><td class="rate">14%</td><td class="price">4.00 div</td><td class="ev">0.56 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Progenesis.png" alt=""/>Progenesis</div></td><td class="rate">2%</td><td class="price">65.00 div</td><td class="ev">1.62 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Ravenous_Passion.png" alt=""/>Ravenous Passion</div></td><td class="rate">68%</td><td class="price">0.01 div</td><td class="ev">0.01 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Ashes_of_the_Stars.png" alt=""/>Ashes of the Stars</div></td><td class="rate">30%</td><td class="price">0.29 div</td><td class="ev">0.09 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Nimis.png" alt=""/>Nimis</div></td><td class="rate">2%</td><td class="price">30.00 div</td><td class="ev">0.60 div</td></tr>
 <tr><td colspan="4" class="cat-label">Encounter-specific</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Awakened_Empower_Support.png" alt=""/>Awakened Empower Support</div></td><td class="rate">0%</td><td class="price">12.00 div</td><td class="ev">0.06 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Awakened_Enhance_Support.png" alt=""/>Awakened Enhance Support</div></td><td class="rate">1%</td><td class="price">9.00 div</td><td class="ev">0.09 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Awakened_Enlighten_Support.png" alt=""/>Awakened Enlighten Support</div></td><td class="rate">0%</td><td class="price">30.00 div</td><td class="ev">0.15 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Eclipse_Support.png" alt=""/>Eclipse Support</div></td><td class="rate">2%</td><td class="price">15.00 div</td><td class="ev">0.30 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Shiny_Reliquary_Key.png" alt=""/>Shiny Reliquary Key</div></td><td class="rate">1%</td><td class="price">1.50 div</td><td class="ev">0.01 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Curio_of_Potential.png" alt=""/>Curio of Potential</div></td><td class="rate">5%</td><td class="price">1.50 div</td><td class="ev">0.08 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Forbidden_Flesh.png" alt=""/>Forbidden Flesh (unid)</div></td><td class="rate">5%</td><td class="price">3.00 div</td><td class="ev">0.15 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Visceral_Reliquary_Key.png" alt=""/>Visceral Reliquary Key</div></td><td class="rate">1%</td><td class="price">1.50 div</td><td class="ev">0.01 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Curio_of_Consumption.png" alt=""/>Curio of Consumption</div></td><td class="rate">5%</td><td class="price">1.50 div</td><td class="ev">0.08 div</td></tr>
 <tr><td colspan="4" class="cat-label">Additional Drops</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Invert_the_Rules_Support.png" alt=""/>Invert the Rules Support</div></td><td class="rate">10%</td><td class="price">3.60 div</td><td class="ev">0.36 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Orb_of_Conflict.png" alt=""/>Orb of Conflict</div></td><td class="rate">32%</td><td class="price">0.86 div</td><td class="ev">0.28 div</td></tr>
-</tbody></table></div>
-<div class="boss-card"><h2>Uber Exarch</h2><div class="total-ev">EV: <span>0.84 div</span> / kill</div><table><thead><tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr></thead><tbody>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Exceptional_Eldritch_Ichor.png" alt=""/>Exceptional Eldritch Ichor</div></td><td class="rate">15%</td><td class="price">0.26 div</td><td class="ev">0.04 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Eldritch_Orb_of_Annulment.png" alt=""/>Eldritch Orb of Annulment</div></td><td class="rate">5%</td><td class="price">0.16 div</td><td class="ev">0.01 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Eldritch_Chaos_Orb.png" alt=""/>Eldritch Chaos Orb</div></td><td class="rate">5%</td><td class="price">0.23 div</td><td class="ev">0.01 div</td></tr>
+<tr><td><div class="item-cell"><img class="item-icon" src="icons/Eldritch_Exalted_Orb.png" alt=""/>Eldritch Exalted Orb</div></td><td class="rate">5%</td><td class="price">0.01 div</td><td class="ev">0.00 div</td></tr>
+</tbody></table></td></tr>
+<tr class="boss-row" onclick="toggleDetail('exarch-uber')">
+<td><span class="expand-btn" id="btn-exarch-uber">▶</span> <span class="boss-name">Uber Exarch</span></td>
+<td class="boss-ev"><span>0.84 div</span> / kill</td>
+</tr>
+<tr class="detail-row" id="detail-exarch-uber">
+<td colspan="2">
+<table class="detail-table">
+<thead><tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr></thead>
+<tbody>
 <tr><td colspan="4" class="cat-label">Guaranteed Unique (1 per kill)</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/The_Annihilating_Light.png" alt=""/>The Annihilating Light</div></td><td class="rate">46%</td><td class="price">0.02 div</td><td class="ev">0.01 div</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Annihilations_Approach.png" alt=""/>Annihilation's Approach</div></td><td class="rate">29%</td><td class="price">0.11 div</td><td class="ev">0.03 div</td></tr>
@@ -76,23 +188,16 @@
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Eldritch_Orb_of_Annulment.png" alt=""/>Eldritch Orb of Annulment</div></td><td class="rate">5%</td><td class="price">0.16 div</td><td class="ev">0.01 div</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Eldritch_Chaos_Orb.png" alt=""/>Eldritch Chaos Orb</div></td><td class="rate">5%</td><td class="price">0.23 div</td><td class="ev">0.01 div</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Eldritch_Exalted_Orb.png" alt=""/>Eldritch Exalted Orb</div></td><td class="rate">5%</td><td class="price">0.01 div</td><td class="ev">0.00 div</td></tr>
-</tbody></table></div>
-<div class="boss-card"><h2>Uber Eater</h2><div class="total-ev">EV: <span>0.99 div</span> / kill</div><table><thead><tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr></thead><tbody>
-<tr><td colspan="4" class="cat-label">Guaranteed Unique (1 per kill)</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Ravenous_Passion.png" alt=""/>Ravenous Passion</div></td><td class="rate">68%</td><td class="price">0.01 div</td><td class="ev">0.01 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Ashes_of_the_Stars.png" alt=""/>Ashes of the Stars</div></td><td class="rate">30%</td><td class="price">0.29 div</td><td class="ev">0.09 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Nimis.png" alt=""/>Nimis</div></td><td class="rate">2%</td><td class="price">30.00 div</td><td class="ev">0.60 div</td></tr>
-<tr><td colspan="4" class="cat-label">Encounter-specific</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Forbidden_Flesh.png" alt=""/>Forbidden Flesh (unid)</div></td><td class="rate">5%</td><td class="price">3.00 div</td><td class="ev">0.15 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Visceral_Reliquary_Key.png" alt=""/>Visceral Reliquary Key</div></td><td class="rate">1%</td><td class="price">1.50 div</td><td class="ev">0.01 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Curio_of_Consumption.png" alt=""/>Curio of Consumption</div></td><td class="rate">5%</td><td class="price">1.50 div</td><td class="ev">0.08 div</td></tr>
-<tr><td colspan="4" class="cat-label">Additional Drops</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Exceptional_Eldritch_Ichor.png" alt=""/>Exceptional Eldritch Ichor</div></td><td class="rate">15%</td><td class="price">0.26 div</td><td class="ev">0.04 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Eldritch_Orb_of_Annulment.png" alt=""/>Eldritch Orb of Annulment</div></td><td class="rate">5%</td><td class="price">0.16 div</td><td class="ev">0.01 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Eldritch_Chaos_Orb.png" alt=""/>Eldritch Chaos Orb</div></td><td class="rate">5%</td><td class="price">0.23 div</td><td class="ev">0.01 div</td></tr>
-<tr><td><div class="item-cell"><img class="item-icon" src="icons/Eldritch_Exalted_Orb.png" alt=""/>Eldritch Exalted Orb</div></td><td class="rate">5%</td><td class="price">0.01 div</td><td class="ev">0.00 div</td></tr>
-</tbody></table></div>
-<div class="boss-card"><h2>Uber Cortex</h2><div class="total-ev">EV: <span>0.67 div</span> / kill</div><table><thead><tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr></thead><tbody>
+</tbody></table></td></tr>
+<tr class="boss-row" onclick="toggleDetail('cortex-uber')">
+<td><span class="expand-btn" id="btn-cortex-uber">▶</span> <span class="boss-name">Uber Cortex</span></td>
+<td class="boss-ev"><span>0.67 div</span> / kill</td>
+</tr>
+<tr class="detail-row" id="detail-cortex-uber">
+<td colspan="2">
+<table class="detail-table">
+<thead><tr><th>Item</th><th style="text-align:center">Rate</th><th style="text-align:right">Price</th><th style="text-align:right">EV</th></tr></thead>
+<tbody>
 <tr><td colspan="4" class="cat-label">Guaranteed Unique (1 per kill)</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Nebulis.png" alt=""/>Nebulis</div></td><td class="rate">34%</td><td class="price">0.14 div</td><td class="ev">0.05 div</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Mask_of_the_Tribunal.png" alt=""/>Mask of the Tribunal (unid)</div></td><td class="rate">34%</td><td class="price">0.07 div</td><td class="ev">0.02 div</td></tr>
@@ -102,5 +207,40 @@
 <tr><td colspan="4" class="cat-label">Encounter-specific</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Forgotten_Reliquary_Key.png" alt=""/>Forgotten Reliquary Key</div></td><td class="rate">2%</td><td class="price">1.50 div</td><td class="ev">0.02 div</td></tr>
 <tr><td colspan="4" class="cat-label">Additional Drops</td></tr>
-</tbody></table></div>
-<div class="last-updated">64 icons local | Prices: 2026-07-03</div></div></body></html>
+</tbody></table></td></tr>
+</tbody></table>
+<div class="last-updated">Prices: 2026-07-03 | Data: poewiki + poe.ninja + Trade API (Lambda)</div>
+</div>
+<script>
+function toggleDetail(id) {
+  var row = document.getElementById('detail-' + id);
+  var btn = document.getElementById('btn-' + id);
+  if (row.classList.contains('open')) {
+    row.classList.remove('open');
+    btn.textContent = '▶';
+  } else {
+    row.classList.add('open');
+    btn.textContent = '▼';
+  }
+}
+let sortDesc = true;
+function sortTable() {
+  var tbody = document.querySelector('#boss-table tbody');
+  var rows = Array.from(tbody.querySelectorAll('tr.boss-row'));
+  rows.sort(function(a, b) {
+    var evA = parseFloat(a.querySelector('.boss-ev span').textContent);
+    var evB = parseFloat(b.querySelector('.boss-ev span').textContent);
+    return sortDesc ? evB - evA : evA - evB;
+  });
+  sortDesc = !sortDesc;
+  var arrow = document.querySelector('#boss-table th .sort-arrow');
+  arrow.textContent = sortDesc ? '▼' : '▲';
+  rows.forEach(function(bossRow) {
+    var detailRow = bossRow.nextElementSibling;
+    tbody.appendChild(bossRow);
+    tbody.appendChild(detailRow);
+  });
+}
+</script>
+</body>
+</html>
