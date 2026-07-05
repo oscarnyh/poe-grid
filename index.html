@@ -39,7 +39,7 @@ table#boss-table{width:100%;border-collapse:collapse;font-size:.84rem}
 .trade-link{color:#c9d1d9;text-decoration:none;cursor:pointer}
 .trade-link:hover{color:#3fb950;text-decoration:underline}</style></head><body><div class="container">
 <header><h1>PoE Grid</h1><p class="subtitle">Expected value per kill — Ancestors league. Sorted by EV. Click boss to expand.</p>
-<p class="last-updated">Prices updated: 2026-07-05 14:58 UTC</p></header><div class="card">
+<p class="last-updated">Prices updated: 2026-07-05 15:23 UTC</p></header><div class="card">
 <table id="boss-table"><thead><tr>
 <th onclick="sortByName()">Boss <span class="sort-arrow" id="arrow-name"></span></th>
 <th style="text-align:right" onclick="sortByEV()">EV / Kill <span class="sort-arrow" id="arrow-ev">▼</span></th>
@@ -156,19 +156,11 @@ table#boss-table{width:100%;border-collapse:collapse;font-size:.84rem}
 <tr><td><div class="item-cell"><img class="item-icon" src="icons/Eldritch_Exalted_Orb.png" alt="" onerror="this.style.display='none'">Eldritch Exalted Orb</div></td><td class="rate">5%</td><td class="price">0.02 div</td><td class="ev">0.00 div</td></tr>
 </tbody></table></td></tr>
 </tbody></table></div></div>
-
-<form id="tradeForm" method="GET" action="https://vxyhks64zc.execute-api.ap-southeast-1.amazonaws.com/poe-dispatcher1" target="_blank" style="display:none">
-  <input type="hidden" name="name" id="tf_name">
-  <input type="hidden" name="league" id="tf_league" value="Ancestors">
-  <input type="hidden" name="gem" id="tf_gem">
-  <input type="hidden" name="unid" id="tf_unid">
-</form>
+</tbody></table></div></div>
 <script>
 function openTrade(name,gem,unid){
-  document.getElementById("tf_name").value=name;
-  document.getElementById("tf_gem").value=gem?"true":"false";
-  document.getElementById("tf_unid").value=unid?"true":"false";
-  document.getElementById("tradeForm").submit();
+  var url="https://vxyhks64zc.execute-api.ap-southeast-1.amazonaws.com/poe-dispatcher1?name="+encodeURIComponent(name)+"&league=Ancestors&gem="+(gem?"true":"false")+"&unid="+(unid?"true":"false");
+  window.open(url,"_blank");
 }
 function toggleDetail(id){
   var row=document.getElementById("detail-"+id);
