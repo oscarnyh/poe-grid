@@ -4,12 +4,15 @@
 <title>PoE Grid</title><style>*{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#0d1117;color:#c9d1d9;min-height:100vh;-webkit-font-smoothing:antialiased}
 .container{max-width:920px;margin:0 auto;padding:40px 20px}
-header{margin-bottom:24px}
-h1{color:#3fb950;font-size:1.6rem;font-weight:700;letter-spacing:-0.3px;margin-bottom:4px}
-h1 .rate-badge{float:right;font-size:.75rem;font-weight:500;color:#e6b422;background:#1a1a1a;padding:2px 10px;border-radius:12px;border:1px solid #e6b422;margin-top:2px;letter-spacing:0}
+header{background:linear-gradient(135deg,#0d1117 0%,#161b22 100%);border:1px solid #21262d;border-radius:10px;padding:20px 24px 16px;margin-bottom:20px;position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:0;left:24px;right:24px;height:2px;background:linear-gradient(90deg,#3fb950,#e6b422);border-radius:1px}
+h1{color:#3fb950;font-size:1.3rem;font-weight:700;letter-spacing:.5px;margin:0 0 8px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+h1 .rate-badge{font-size:.68rem;font-weight:500;color:#e6b422;background:rgba(230,180,34,0.1);padding:3px 12px;border-radius:20px;border:1px solid rgba(230,180,34,0.3);letter-spacing:0;white-space:nowrap;display:inline-flex;align-items:center;gap:4px}
 .currency-icon{height:1em;vertical-align:middle;margin:0 2px}
-.subtitle{color:#8b949e;font-size:.8rem;font-weight:400}
-.last-updated{color:#484f58;font-size:.7rem;margin-top:4px}
+.header-info{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.subtitle{color:#8b949e;font-size:.78rem;font-weight:400;margin:0}
+.last-updated{color:#484f58;font-size:.68rem;margin:0}
+.header-sep{color:#30363d;font-size:.7rem}
 nav.tabs{display:flex;gap:0;margin-bottom:24px;border-bottom:1px solid #21262d}
 nav.tabs a{display:block;padding:10px 20px;color:#8b949e;text-decoration:none;font-size:.85rem;font-weight:500;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
 nav.tabs a:hover{color:#c9d1d9}
@@ -85,8 +88,7 @@ table#boss-table{width:100%;border-collapse:collapse;font-size:.84rem}
 .placeholder{text-align:center;padding:80px 20px;color:#484f58}
 .placeholder h2{font-size:1.3rem;margin-bottom:12px;color:#8b949e}
 .placeholder p{font-size:.9rem}</style></head><body><div class="container">
-<header><h1>PoE Grid<span class="rate-badge"><img class="currency-icon" src="/poe-grid/icons/Divine_Orb.png" alt="div"> : <img class="currency-icon" src="/poe-grid/icons/Chaos_Orb.png" alt="c"> = 1 : 543.9</span></h1><p class="subtitle">Current league: Mirage</p>
-<p class="last-updated">Prices updated: 2026-07-09 12:48 GMT+8</p></header>
+<header><h1>PoE Grid<span class="rate-badge"><img class="currency-icon" src="/poe-grid/icons/Divine_Orb.png" alt="div"> : <img class="currency-icon" src="/poe-grid/icons/Chaos_Orb.png" alt="c"> = 1 : 543.9</span></h1><div class="header-info"><p class="subtitle">Current league: Mirage</p><span class="header-sep">·</span><p class="last-updated">Prices updated: 2026-07-09 12:53 GMT+8</p></div></header>
 <nav class="tabs">
 <a href="index.html" class="active">Bossing</a>
 <a href="identifying.html" class="">Identifying</a>
