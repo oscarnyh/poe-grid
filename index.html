@@ -85,14 +85,14 @@ table#boss-table{width:100%;border-collapse:collapse;font-size:.84rem}
 .placeholder h2{font-size:1.3rem;margin-bottom:12px;color:#8b949e}
 .placeholder p{font-size:.9rem}</style></head><body><div class="container">
 <header><h1>PoE Grid<span class="rate-badge"><img class="currency-icon" src="/poe-grid/icons/Divine_Orb.png" alt="div"> : <img class="currency-icon" src="/poe-grid/icons/Chaos_Orb.png" alt="c"> = 1 : 543.9</span></h1><p class="subtitle">Current league: Mirage</p>
-<p class="last-updated">Prices updated: 2026-07-09 03:53 UTC</p></header>
+<p class="last-updated">Prices updated: 2026-07-09 04:00 UTC</p></header>
 <nav class="tabs">
 <a href="index.html" class="active">Bossing</a>
 <a href="identifying.html" class="">Identifying</a>
 <a href="tracing.html" class="">Tracing</a>
 </nav>
 <div class="card">
-<table id="boss-table"><thead><tr>
+<div class="table-wrapper"><table id="boss-table"><thead><tr>
 <th onclick="sortByName()">Boss <span class="sort-arrow" id="arrow-name"></span></th>
 <th style="text-align:right" onclick="sortByCol('ev')" id="th-ev">Gain <span class="sort-arrow" id="arrow-ev">▼</span></th>
 <th style="text-align:right" onclick="sortByCol('cost')" id="th-cost">Cost <span class="sort-arrow" id="arrow-cost"></span></th>
@@ -470,7 +470,7 @@ table#boss-table{width:100%;border-collapse:collapse;font-size:.84rem}
 <tr><td colspan="4" class="cat-label">Entry Cost</td></tr>
 <tr><td><div class="item-cell"><img class="item-icon" src="/poe-grid/icons/Echo_of_Loneliness.png" alt="" onerror="this.style.display='none'">Echo of Loneliness</div></td><td class="rate">—</td><td class="price" style="color:#da3633">1.00 div</td><td class="ev" style="color:#da3633">1.00 div</td></tr>
 </tbody></table></td></tr>
-</tbody></table></div>
+</tbody></table></div></div>
 </div>
 <script>
 function toggleDetail(id){
