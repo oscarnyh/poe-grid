@@ -15,6 +15,12 @@ nav.tabs a{display:block;padding:10px 20px;color:#8b949e;text-decoration:none;fo
 nav.tabs a:hover{color:#c9d1d9}
 nav.tabs a.active{color:#3fb950;border-bottom-color:#3fb950}
 .card{background:#161b22;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.3);overflow:hidden;border:1px solid #21262d}
+.card h2{color:#c9d1d9;font-size:1rem;font-weight:600;padding:14px 16px;border-bottom:1px solid #21262d}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{text-align:left;padding:10px 14px;border-bottom:1px solid #21262d;color:#8b949e;font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.7px;background:#0d1117}
+td{padding:8px 14px;border-bottom:1px solid #21262d}
+tr:last-child td{border-bottom:none}
+tr:hover{background:#1c2128}
 table#boss-table{width:100%;border-collapse:collapse;font-size:.84rem}
 #boss-table thead{background:#0d1117}
 #boss-table th{text-align:left;padding:12px 16px;border-bottom:1px solid #21262d;color:#8b949e;font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;cursor:pointer;user-select:none}
@@ -43,7 +49,17 @@ table#boss-table{width:100%;border-collapse:collapse;font-size:.84rem}
 .item-icon{width:22px;height:22px;flex-shrink:0;object-fit:contain;border-radius:3px}
 .rate{color:#6e7681;text-align:center;font-size:.76rem;font-variant-numeric:tabular-nums}
 .price{color:#3fb950;text-align:right;font-weight:500;font-variant-numeric:tabular-nums}
+.price.neg{color:#da3633}
 .ev{color:#56d364;text-align:right;font-weight:500;font-variant-numeric:tabular-nums}
+.ev.neg{color:#da3633}
+.mod-table{font-size:.78rem}
+.mod-table td{padding:5px 10px}
+.card-header{cursor:pointer;padding:14px 16px;border-bottom:1px solid #21262d}
+.card-header h2{display:inline;font-size:1rem;font-weight:600;color:#c9d1d9}
+.collapsible-section[open] .card-header{border-bottom:1px solid #21262d}
+.worth{text-align:center;font-weight:600;font-size:.75rem;padding:2px 8px;border-radius:4px}
+.worth.yes{color:#3fb950;background:#1a3a1a}
+.worth.no{color:#da3633;background:#3a1a1a}
 .trade-link{color:#c9d1d9;text-decoration:none;cursor:pointer}
 .trade-link:hover{color:#3fb950;text-decoration:underline}
 .boss-cost{color:#da3633;text-align:right;font-weight:500;font-size:.92rem;font-variant-numeric:tabular-nums}
@@ -69,7 +85,7 @@ table#boss-table{width:100%;border-collapse:collapse;font-size:.84rem}
 .placeholder h2{font-size:1.3rem;margin-bottom:12px;color:#8b949e}
 .placeholder p{font-size:.9rem}</style></head><body><div class="container">
 <header><h1>PoE Grid<span class="rate-badge"><img class="currency-icon" src="/poe-grid/icons/Divine_Orb.png" alt="div"> : <img class="currency-icon" src="/poe-grid/icons/Chaos_Orb.png" alt="c"> = 1 : 543.9</span></h1><p class="subtitle">Current league: Mirage</p>
-<p class="last-updated">Prices updated: 2026-07-08 23:48 UTC</p></header>
+<p class="last-updated">Prices updated: 2026-07-09 03:44 UTC</p></header>
 <nav class="tabs">
 <a href="index.html" class="active">Bossing</a>
 <a href="identifying.html" class="">Identifying</a>
