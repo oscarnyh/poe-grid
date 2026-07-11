@@ -89,7 +89,7 @@ table#boss-table{width:100%;border-collapse:collapse;font-size:.84rem}
 .placeholder h2{font-size:1.3rem;margin-bottom:12px;color:#8b949e}
 .placeholder p{font-size:.9rem}
 </style></head><body><div class="container">
-<header><h1>PoE Grid</h1><div class="header-info"><p class="subtitle">Current league: Mirage</p><span class="header-sep">·</span><p class="last-updated">Prices updated: 2026-07-12 03:09 GMT+8</p></div></header>
+<header><h1>PoE Grid</h1><div class="header-info"><p class="subtitle">Current league: Mirage</p><span class="header-sep">·</span><p class="last-updated">Prices updated: 2026-07-12 03:21 GMT+8</p></div></header>
 <nav class="tabs">
 <a href="index.html" class="active">Bossing</a>
 <a href="identifying.html">Identifying</a>
@@ -525,7 +525,11 @@ function sortTable(col,arrowId,resetCol,asc){
     return asc?va>vb?1:va<vb?-1:0:va<vb?1:va>vb?-1:0;
   });
   var tb=t.querySelector('tbody');
-  rows.forEach(function(r){tb.appendChild(r);});
+  rows.forEach(function(r){
+    var detail=r.nextElementSibling;
+    tb.appendChild(r);
+    if(detail&&detail.classList.contains('detail-row'))tb.appendChild(detail);
+  });
   document.getElementById('arrow-name').textContent='';
   document.getElementById('arrow-ev').textContent='';
   document.getElementById('arrow-profit').textContent='';
