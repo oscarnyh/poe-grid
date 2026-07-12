@@ -69,13 +69,16 @@ table#boss-table{width:100%;border-collapse:collapse;font-size:.84rem}
 .boss-cost{color:#da3633;text-align:right;font-weight:500;font-size:.82rem;font-variant-numeric:tabular-nums;width:17%}
 .boss-profit{color:#3fb950;text-align:right;font-weight:700;font-size:.82rem;font-variant-numeric:tabular-nums;width:17%}
 .boss-profit.neg{color:#da3633}
-.ident-row{cursor:pointer;transition:background .15s}
+.ident-row{cursor:pointer;user-select:none}
 .ident-row:hover{background:#1c2128}
-.ident-row td{padding:10px 12px;border-bottom:1px solid #21262d;white-space:nowrap}
+.ident-row td{padding:10px 12px;border-bottom:1px solid #21262d;white-space:nowrap;color:#c9d1d9;font-weight:600;font-size:.82rem}
 .ident-row:last-child td{border-bottom:none}
+.ident-row .expand-btn{display:inline-block;width:16px;text-align:center;color:#484f58;font-size:.7rem;margin-right:3px}
+.ident-row.no-expand{cursor:default}
+.ident-row.no-expand .expand-btn{visibility:hidden}
 .ident-detail{display:none}
 .ident-detail.open{display:table-row}
-.ident-detail td{padding:0 16px 16px 56px;border-bottom:1px solid #21262d}
+.ident-detail td{padding:0 16px 20px 56px;border-bottom:1px solid #21262d}
 .detail-empty{color:#484f58;font-size:.8rem;text-align:center;padding:20px}
 .collapsible-section{margin-top:24px;background:#161b22;border:1px solid #21262d;border-radius:8px;overflow:hidden}
 .collapsible-section>summary{cursor:pointer;padding:14px 16px;color:#c9d1d9;font-weight:600;font-size:.95rem;list-style:none;user-select:none;transition:background .15s}
@@ -99,7 +102,7 @@ table#boss-table{width:100%;border-collapse:collapse;font-size:.84rem}
 .placeholder h2{font-size:1.3rem;margin-bottom:12px;color:#8b949e}
 .placeholder p{font-size:.9rem}
 </style></head><body><div class="container">
-<header><h1>PoE Grid — Tracing<span class="rate-badge"><img class="currency-icon" src="/poe-grid/icons/Divine_Orb.png" alt="div"> : <img class="currency-icon" src="/poe-grid/icons/Chaos_Orb.png" alt="c"> = 1 : 547</span></h1><div class="header-info"><p class="subtitle">Current league: Mirage</p><span class="header-sep">·</span><p class="last-updated">Prices updated: 2026-07-13 02:00 GMT+8</p></div></header>
+<header><h1>PoE Grid — Tracing<span class="rate-badge"><img class="currency-icon" src="/poe-grid/icons/Divine_Orb.png" alt="div"> : <img class="currency-icon" src="/poe-grid/icons/Chaos_Orb.png" alt="c"> = 1 : 547</span></h1><div class="header-info"><p class="subtitle">Current league: Mirage</p><span class="header-sep">·</span><p class="last-updated">Prices updated: 2026-07-13 02:07 GMT+8</p></div></header>
 <nav class="tabs">
 <a href="index.html">Bossing</a>
 <a href="identifying.html">Identifying</a>
