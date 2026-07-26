@@ -112,14 +112,78 @@ table#boss-table{width:100%;border-collapse:collapse;font-size:.84rem}
 .placeholder p{font-size:.9rem}
 .jewel-select{background:#0d1117;color:#c9d1d9;border:1px solid #30363d;border-radius:6px;padding:6px 10px;font-size:.84rem;outline:none;cursor:pointer;flex:1;max-width:280px}
 .jewel-select:focus{border-color:#3fb950}
+.refresh-btn{background:rgba(63,185,80,0.1);color:#3fb950;border:1px solid rgba(63,185,80,0.3);border-radius:6px;padding:2px 8px;font-size:.75rem;cursor:pointer;transition:all .2s;line-height:1.4;margin-left:4px}
+.refresh-btn:hover{background:rgba(63,185,80,0.2);border-color:rgba(63,185,80,0.5)}
+.refresh-btn.loading{background:rgba(230,180,34,0.15);color:#e6b422;border-color:rgba(230,180,34,0.4);cursor:wait;animation:pulse .8s infinite}
+.refresh-btn.done{background:rgba(63,185,80,0.2);color:#3fb950;border-color:rgba(63,185,80,0.5);cursor:default}
+.refresh-btn.error{background:rgba(218,54,51,0.15);color:#da3633;border-color:rgba(218,54,51,0.4)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
 </style></head><body><div class="container">
-<header><h1>PoE Grid<span class="rate-badge"><img class="currency-icon" src="/poe-grid/icons/Divine_Orb.png" alt="div"> : <img class="currency-icon" src="/poe-grid/icons/Chaos_Orb.png" alt="c"> = 1 : 89</span></h1><div class="header-info"><p class="subtitle">Current league: allflame</p><span class="header-sep">·</span><p class="last-updated">Prices updated: 2026-07-26 09:11 GMT+8</p></div></header>
+<header><h1>PoE Grid<span class="rate-badge"><img class="currency-icon" src="/poe-grid/icons/Divine_Orb.png" alt="div"> : <img class="currency-icon" src="/poe-grid/icons/Chaos_Orb.png" alt="c"> = 1 : 90</span></h1><div class="header-info"><p class="subtitle">Current league: allflame</p><span class="header-sep">·</span><p class="last-updated">Prices updated: 2026-07-26 13:50 GMT+8</p><button class="refresh-btn" id="refresh-btn" onclick="triggerRefresh()" title="Refresh prices">⟳</button></div></header>
 <nav class="tabs">
 <a href="index.html">Bossing</a>
 <a href="identifying.html">Identifying</a>
 <a href="gem-leveling.html" class="active">Gem Leveling</a>
 <a href="tracing.html">Tracing</a>
 </nav>
+
+<script>
+var REFRESH_URL = "https://poe-grid.serveo.net";
+var refreshTimer = null;
+function triggerRefresh() {
+  var btn = document.getElementById('refresh-btn');
+  if (btn.classList.contains('loading') || btn.classList.contains('done')) return;
+  btn.classList.add('loading');
+  btn.textContent = '⏳';
+  btn.title = 'Running pipeline...';
+  fetch(REFRESH_URL + '/run', {method:'POST'})
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if (data.status === 'running' || data.status === 'already_running') {
+        pollStatus();
+      } else {
+        showError(btn);
+      }
+    })
+    .catch(function(){ showError(btn); });
+}
+function pollStatus() {
+  var btn = document.getElementById('refresh-btn');
+  fetch(REFRESH_URL + '/status')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if (data.status === 'done') {
+        btn.classList.remove('loading');
+        btn.classList.add('done');
+        btn.textContent = '✓';
+        btn.title = 'Done! Reloading...';
+        setTimeout(function(){ location.reload(); }, 1500);
+      } else if (data.status === 'error') {
+        showError(btn);
+      } else {
+        refreshTimer = setTimeout(pollStatus, 3000);
+      }
+    })
+    .catch(function(){ showError(btn); });
+}
+function showError(btn) {
+  btn.classList.remove('loading');
+  btn.classList.add('error');
+  btn.textContent = '✗';
+  btn.title = 'Refresh failed — click to retry';
+  setTimeout(function(){
+    btn.classList.remove('error');
+    btn.textContent = '⟳';
+    btn.title = 'Refresh prices';
+  }, 4000);
+}
+function resetRefreshBtn() {
+  var btn = document.getElementById('refresh-btn');
+  btn.classList.remove('done', 'error', 'loading');
+  btn.textContent = '⟳';
+  btn.title = 'Refresh prices';
+}
+</script>
 <div class="card">
 <table id="gem-table">
 <thead>
@@ -133,256 +197,760 @@ table#boss-table{width:100%;border-collapse:collapse;font-size:.84rem}
 </thead>
 <tbody>
 <tr class="gem-row">
-  <td class="gem-name">Minion Life Support</td>
-  <td class="gem-cost">Lv1 — 0.0</td>
-  <td class="gem-sell">Lv20 — 0.6</td>
-  <td class="profit-pos" data-sort="0.6">+0.6</td>
-  <td class="gem-listed">149</td>
+  <td class="gem-name">Enlighten Support</td>
+  <td class="gem-cost">Lv1 — 1.8</td>
+  <td class="gem-sell">Lv3 — 3.2</td>
+  <td class="profit-pos" data-sort="1.4">+1.4</td>
+  <td class="gem-listed">195</td>
 </tr>
 <tr class="gem-row">
-  <td class="gem-name">Purity of Fire</td>
-  <td class="gem-cost">vendor</td>
+  <td class="gem-name">Increased Critical Damage Support</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.7</td>
+  <td class="profit-pos" data-sort="0.7">+0.7</td>
+  <td class="gem-listed">245</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Volatility Support</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.5</td>
   <td class="profit-pos" data-sort="0.5">+0.5</td>
-  <td class="gem-listed">101</td>
+  <td class="gem-listed">98</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Winter Orb</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.5</td>
+  <td class="profit-pos" data-sort="0.5">+0.5</td>
+  <td class="gem-listed">805</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Animate Guardian</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.4</td>
   <td class="profit-pos" data-sort="0.4">+0.4</td>
-  <td class="gem-listed">330</td>
+  <td class="gem-listed">346</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Determination</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.3</td>
+  <td class="profit-pos" data-sort="0.3">+0.3</td>
+  <td class="gem-listed">231</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Discipline</td>
   <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.3</td>
+  <td class="profit-pos" data-sort="0.3">+0.3</td>
+  <td class="gem-listed">141</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Elemental Hit of the Spectrum</td>
+  <td class="gem-cost">Lv1 — 0.1</td>
   <td class="gem-sell">Lv20 — 0.4</td>
-  <td class="profit-pos" data-sort="0.4">+0.4</td>
-  <td class="gem-listed">103</td>
+  <td class="profit-pos" data-sort="0.3">+0.3</td>
+  <td class="gem-listed">227</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Frostblink of Wintry Blast</td>
+  <td class="gem-cost">Lv1 — 0.2</td>
+  <td class="gem-sell">Lv20 — 0.5</td>
+  <td class="profit-pos" data-sort="0.3">+0.3</td>
+  <td class="gem-listed">190</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Minion Life Support</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.3</td>
+  <td class="profit-pos" data-sort="0.3">+0.3</td>
+  <td class="gem-listed">156</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Raise Spectre</td>
   <td class="gem-cost">Lv1 — 0.0</td>
-  <td class="gem-sell">Lv20 — 0.4</td>
-  <td class="profit-pos" data-sort="0.4">+0.4</td>
-  <td class="gem-listed">164</td>
-</tr>
-<tr class="gem-row">
-  <td class="gem-name">Increased Critical Damage Support</td>
-  <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.3</td>
   <td class="profit-pos" data-sort="0.3">+0.3</td>
-  <td class="gem-listed">241</td>
+  <td class="gem-listed">149</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Inspiration Support</td>
   <td class="gem-cost">Lv1 — 0.0</td>
-  <td class="gem-sell">Lv20 — 0.3</td>
-  <td class="profit-pos" data-sort="0.3">+0.3</td>
-  <td class="gem-listed">197</td>
+  <td class="gem-sell">Lv20 — 0.2</td>
+  <td class="profit-pos" data-sort="0.2">+0.2</td>
+  <td class="gem-listed">305</td>
 </tr>
 <tr class="gem-row">
-  <td class="gem-name">Fist of War Support</td>
+  <td class="gem-name">Power Charge On Critical Support</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.2</td>
   <td class="profit-pos" data-sort="0.2">+0.2</td>
-  <td class="gem-listed">96</td>
+  <td class="gem-listed">124</td>
 </tr>
 <tr class="gem-row">
-  <td class="gem-name">Added Cold Damage Support</td>
+  <td class="gem-name">Purity of Fire</td>
   <td class="gem-cost">Lv1 — 0.0</td>
-  <td class="gem-sell">Lv20 — 0.1</td>
-  <td class="profit-pos" data-sort="0.1">+0.1</td>
-  <td class="gem-listed">208</td>
+  <td class="gem-sell">Lv20 — 0.2</td>
+  <td class="profit-pos" data-sort="0.2">+0.2</td>
+  <td class="gem-listed">135</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Automation</td>
   <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-pos" data-sort="0.1">+0.1</td>
+  <td class="gem-listed">244</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Concentrated Effect Support</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.2</td>
   <td class="profit-pos" data-sort="0.1">+0.1</td>
-  <td class="gem-listed">267</td>
+  <td class="gem-listed">180</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Controlled Destruction Support</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.1</td>
   <td class="profit-pos" data-sort="0.1">+0.1</td>
-  <td class="gem-listed">188</td>
+  <td class="gem-listed">208</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Earthshatter</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.1</td>
   <td class="profit-pos" data-sort="0.1">+0.1</td>
-  <td class="gem-listed">121</td>
+  <td class="gem-listed">156</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Elemental Damage with Attacks Support</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-pos" data-sort="0.1">+0.1</td>
+  <td class="gem-listed">137</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Ethereal Knives</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-pos" data-sort="0.1">+0.1</td>
+  <td class="gem-listed">139</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Exsanguinate</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-pos" data-sort="0.1">+0.1</td>
+  <td class="gem-listed">182</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Fire Trap</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-pos" data-sort="0.1">+0.1</td>
+  <td class="gem-listed">211</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Fist of War Support</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-pos" data-sort="0.1">+0.1</td>
+  <td class="gem-listed">138</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Flame Surge</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-pos" data-sort="0.1">+0.1</td>
+  <td class="gem-listed">87</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Flesh and Stone</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.2</td>
+  <td class="profit-pos" data-sort="0.1">+0.1</td>
+  <td class="gem-listed">130</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Herald of Thunder</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-pos" data-sort="0.1">+0.1</td>
+  <td class="gem-listed">163</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Kinetic Blast</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-pos" data-sort="0.1">+0.1</td>
+  <td class="gem-listed">204</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Minion Damage Support</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-pos" data-sort="0.1">+0.1</td>
+  <td class="gem-listed">238</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Penance Brand</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.1</td>
   <td class="profit-pos" data-sort="0.1">+0.1</td>
-  <td class="gem-listed">140</td>
+  <td class="gem-listed">179</td>
 </tr>
 <tr class="gem-row">
-  <td class="gem-name">Righteous Fire</td>
+  <td class="gem-name">Poisonous Concoction of Bouncing</td>
+  <td class="gem-cost">Lv1 — 0.1</td>
+  <td class="gem-sell">Lv20 — 0.2</td>
+  <td class="profit-pos" data-sort="0.1">+0.1</td>
+  <td class="gem-listed">457</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Purity of Elements</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.1</td>
   <td class="profit-pos" data-sort="0.1">+0.1</td>
-  <td class="gem-listed">656</td>
+  <td class="gem-listed">206</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Reap</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-pos" data-sort="0.1">+0.1</td>
+  <td class="gem-listed">72</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Storm Burst</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.1</td>
   <td class="profit-pos" data-sort="0.1">+0.1</td>
-  <td class="gem-listed">104</td>
+  <td class="gem-listed">145</td>
 </tr>
 <tr class="gem-row">
-  <td class="gem-name">Winter Orb</td>
+  <td class="gem-name">Added Cold Damage Support</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.1</td>
-  <td class="profit-pos" data-sort="0.1">+0.1</td>
-  <td class="gem-listed">706</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">227</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Ancestral Cry</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">138</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Armageddon Brand</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">194</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Artillery Ballista</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">137</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Autoexertion</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">199</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Ball Lightning</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">115</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Bladestorm</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">57</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Blast Rain</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">41</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Blood Rage</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">186</td>
+  <td class="gem-listed">209</td>
 </tr>
 <tr class="gem-row">
-  <td class="gem-name">Caustic Arrow</td>
+  <td class="gem-name">Cleave</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">103</td>
+  <td class="gem-listed">52</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Close Combat Support</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">99</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Cold Snap</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">165</td>
+  <td class="gem-listed">188</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Corrupting Fever</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">124</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Despair</td>
   <td class="gem-cost">Lv1 — 0.0</td>
-  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">116</td>
+  <td class="gem-listed">139</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Earthquake</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">132</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Elemental Hit</td>
   <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">239</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Eye of Winter</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">186</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Flame Link</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.1</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">187</td>
+  <td class="gem-listed">181</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Flammability</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">252</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Forbidden Rite</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">124</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Frenzy</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">153</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Frost Blades</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">112</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Frost Bomb</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">271</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Frost Wall</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">113</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Frostblink</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">402</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">General's Cry</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">147</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Greater Multiple Projectiles Support</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">308</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Greater Volley Support</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">135</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Herald of Ash</td>
   <td class="gem-cost">Lv1 — 0.0</td>
-  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">290</td>
+  <td class="gem-listed">335</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Ice Shot</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">108</td>
+  <td class="gem-listed">119</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Immortal Call</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">111</td>
+  <td class="gem-listed">112</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Intimidating Cry</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">187</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Kinetic Bolt</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">219</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Kinetic Fusillade</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">277</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Kinetic Rain</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">68</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Lightning Arrow</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">161</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Lightning Strike</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">142</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Melee Physical Damage Support</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">179</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Momentum Support</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">387</td>
+  <td class="gem-listed">433</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Multiple Projectiles Support</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">321</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Poacher's Mark</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">147</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Poisonous Concoction</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">344</td>
+  <td class="gem-listed">384</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Pyroclast Mine</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">129</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Righteous Fire</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">647</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Seismic Cry</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">121</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Shattering Steel</td>
+  <td class="gem-cost">vendor</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">93</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Shield Charge</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">525</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Shock Nova</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">106</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Siege Ballista</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">106</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Snipe</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">93</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Sniper's Mark</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">175</td>
+  <td class="gem-listed">201</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Somatic Shell</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">108</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Soulrend</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">96</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Spark</td>
   <td class="gem-cost">Lv1 — 0.0</td>
-  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">166</td>
+  <td class="gem-listed">194</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Spectral Shield Throw</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">114</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Spellslinger</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">276</td>
+  <td class="gem-listed">294</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Static Strike</td>
   <td class="gem-cost">Lv1 — 0.0</td>
-  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">156</td>
+  <td class="gem-listed">181</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Steelskin</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">69</td>
+  <td class="gem-listed">83</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Summon Carrion Golem</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">211</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Summon Chaos Golem</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">283</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Summon Flame Golem</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">223</td>
+  <td class="gem-listed">299</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Summon Ice Golem</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">200</td>
+  <td class="gem-listed">213</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Summon Lightning Golem</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">212</td>
+  <td class="gem-listed">254</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Summon Raging Spirit</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">195</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Summon Stone Golem</td>
   <td class="gem-cost">Lv1 — 0.0</td>
   <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
-  <td class="gem-listed">308</td>
+  <td class="gem-listed">379</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Sunder</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">244</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Temporal Chains</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">123</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Tornado</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">88</td>
 </tr>
 <tr class="gem-row">
   <td class="gem-name">Trinity Support</td>
   <td class="gem-cost">Lv1 — 0.0</td>
-  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">187</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Viper Strike</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
   <td class="profit-neg" data-sort="0.0">+0.0</td>
   <td class="gem-listed">150</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Volatile Dead</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">132</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Vortex</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">140</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Vulnerability</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">156</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Wave of Conviction</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.0</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">190</td>
+</tr>
+<tr class="gem-row">
+  <td class="gem-name">Withering Step</td>
+  <td class="gem-cost">Lv1 — 0.0</td>
+  <td class="gem-sell">Lv20 — 0.1</td>
+  <td class="profit-neg" data-sort="0.0">+0.0</td>
+  <td class="gem-listed">147</td>
 </tr>
 </tbody>
 </table>
